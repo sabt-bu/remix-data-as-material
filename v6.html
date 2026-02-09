@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Orange - Scattered Layout</title>
+    <style>
+        @font-face {
+            font-family: 'Cooper Md BT';
+            src: url('Cooper Md BT Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background: #1940F4;
+        }
+        .container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            background: transparent;
+            overflow: visible;
+            margin-left: 0;
+        }
+        .content-wrapper {
+            width: 1440px;
+            height: 1024px;
+            position: absolute;
+            transform-origin: top left;
+        }
+        .lines-container {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1440px;
+            height: 1024px;
+        }
+        .line-svg {
+            position: absolute;
+            overflow: visible;
+        }
+        .line-svg text {
+            fill: white;
+            font-family: 'Cooper Md BT', serif;
+            font-size: 18px;
+            font-weight: 400;
+        }
+        .line-svg .path-stroke {
+            fill: none;
+            stroke: none;
+            visibility: hidden;
+        }
+
+.navbar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar::after {
+    content: '';
+    position: fixed;
+    left: 240px;
+    top: 0;
+    width: 1px;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+}
+
+html, body {
+    padding-left: 0;
+}
+
+
+.navbar-bg {
+    width: 240px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: #1940F4;
+}
+
+.navbar-logo {
+    width: 150px;
+    height: 120px;
+    left: 20px;
+    top: 40px;
+    position: absolute;
+    transform: rotate(-18deg);
+    transform-origin: top left;
+}
+
+.navbar-logo-text {
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    line-height: 20px;
+    position: absolute;
+    left: 20px;
+    top: 35px;
+    width: 100px;
+}
+
+.navbar-section {
+    width: 120px;
+    left: 50px;
+    position: absolute;
+}
+
+.navbar-section-title {
+    color: white;
+    font-size: 12px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 8px;
+}
+
+@keyframes rotateEllipse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.navbar-logo svg {
+    animation: rotateEllipse 20s linear infinite;
+    transform-origin: center center;
+}
+
+.navbar-section-items {
+    color: white;
+    font-size: 12px;
+    font-family: IBM Plex Mono;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.navbar-section-items a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.navbar-section-items a:hover {
+    color: #FF9B5C;
+}
+
+.navbar-section-items a.active {
+    color: #FF9B5C;
+    font-weight: 700;
+}
+
+.navbar-divider {
+    width: 240px;
+    height: 0;
+    left: 0;
+    position: absolute;
+    border-top: 1px white solid;
+    
+}
+
+@media (max-height: 700px) {
+    .navbar {
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    html, body {
+        padding-left: 0;
+    }
+}
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-logo">
+        <div class="navbar-logo-text">The Orange</div>
+        <svg width="130" height="110" style="position: absolute; left: 0; top: 0;">
+            <defs>
+                <path id="ellipsePath" d="M 65,8 a 60,48 0 1,1 -1,0" fill="none"/>
+            </defs>
+            <text fill="white" font-size="8" font-family="IBM Plex Mono, monospace" font-weight="500">
+                <textPath href="#ellipsePath" startOffset="0%">
+                    A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE •
+                </textPath>
+            </text>
+        </svg>
+    </div>
+    <div class="navbar-divider" style="top: 160px;"></div>
+    <div class="navbar-section" style="top: 170px;">
+        <span class="navbar-section-title">Oranges</span>
+        <span class="navbar-section-items"><a href="v1.html">1.1 Space</a><br/><a href="v2.html">1.2 Peel</a><br/><a href="v3.html">1.3 Whole</a><br/><a href="v4.html">1.4 Slice</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 290px;"></div>
+    <div class="navbar-section" style="top: 300px;">
+        <span class="navbar-section-title">Sharing</span>
+        <span class="navbar-section-items"><a href="v5.html">2.1 Ripple</a><br/><a href="v6.html" class="active">2.2 Bag</a><br/><a href="v7.html">2.3 Warmth</a><br/><a href="v8.html">2.4 Peeling</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 420px;"></div>
+    <div class="navbar-section" style="top: 430px;">
+        <span class="navbar-section-title">Attention</span>
+        <span class="navbar-section-items"><a href="v9.html">3.1 Huge Orange</a><br/><a href="v10.html">3.2 Details</a><br/><a href="v11.html">3.3 Exist</a><br/><a href="v12.html">3.4 Stickers</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 550px;"></div>
+    <div class="navbar-section" style="top: 560px;">
+        <span class="navbar-section-title">Play</span>
+        <span class="navbar-section-items"><a href="v13.html">4.1 Search</a><br/><a href="v14.html">4.2 Connect</a><br/><a href="v15.html">4.3 Crossword</a><br/><a href="v16.html">4.4 Search</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 680px;"></div>
+    <div class="navbar-section" style="top: 690px;">
+        <span class="navbar-section-title">Flow</span>
+        <span class="navbar-section-items"><a href="v17.html">5.1 Day</a><br/><a href="v18.html">5.2 Direction</a><br/><a href="v19.html">5.3 Perspective</a><br/><a href="v20.html">5.4 Alphabet Soup</a></span>
+    </div>
+</div>
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="lines-container">
+                <!-- Line 1: At lunchtime I bought a huge orange— -->
+                <svg class="line-svg" width="362" height="599" viewBox="0 0 362 599" style="left: 60px; top: 20px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><path id="line1" d="M1 598C2.68381 592.225 9.89219 576.721 20.1508 554.071C25.5035 542.252 41.1218 499.687 64.3336 442.952C80.8735 402.524 100.705 371.99 110.937 350.648C120.817 330.042 132.51 282.23 168.957 207.107C182.979 178.204 191.368 157.229 213.432 111.46C231.568 73.841 266.166 8.1661 284.678 -27.8925C309.204 -75.6658 311.82 -92.4625 317.564 -112.698C322.193 -129.003 334.407 -158.856 342.587 -180.579C347.634 -196.004 352.675 -208.481 356.159 -216.239C357.706 -220.068 358.803 -223.678 361 -232"/></defs>
+                    <path class="path-stroke" d="M1 598C2.68381 592.225 9.89219 576.721 20.1508 554.071C25.5035 542.252 41.1218 499.687 64.3336 442.952C80.8735 402.524 100.705 371.99 110.937 350.648C120.817 330.042 132.51 282.23 168.957 207.107C182.979 178.204 191.368 157.229 213.432 111.46C231.568 73.841 266.166 8.1661 284.678 -27.8925C309.204 -75.6658 311.82 -92.4625 317.564 -112.698C322.193 -129.003 334.407 -158.856 342.587 -180.579C347.634 -196.004 352.675 -208.481 356.159 -216.239C357.706 -220.068 358.803 -223.678 361 -232" stroke-width="2" stroke-linecap="round"/>
+                    <text><textPath href="#line1">At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • At lunchtime I bought a huge orange— • </textPath></text>
+                </svg>
+                <!-- Line 2: The size of it made us all laugh. -->
+                <svg class="line-svg" width="377" height="1024" viewBox="0 0 377 1024" style="left: 420px; top: 0;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><path id="line2" d="M1.15012 1534C0.85926 1534 0.563992 1491.77 4.6831 1389.45C7.10639 1329.25 17.6266 1252.67 23.587 1205.24C31.5568 1141.81 35.5957 1103.76 44.1315 1027.24C50.267 972.237 69.7391 885.697 83.7503 820.202C106.709 712.882 120.164 666.139 122.123 653.708C123.391 645.661 123.082 633.817 134.082 586.585C145.081 539.354 166.854 457.026 183.134 404.209C206.176 329.457 220.307 303.858 229.021 259.546C236.725 220.372 253.841 147.884 269.911 88.2338C298.193 -16.7431 318.461 -65.4484 320.967 -72.9922C331.673 -105.221 351.637 -164.056 358.629 -184.24C364.646 -203.054 367.527 -216.656 368.086 -224.384C368.63 -228.41 369.704 -232.648 376 -240"/></defs>
+                    <path class="path-stroke" d="M1.15012 1534C0.85926 1534 0.563992 1491.77 4.6831 1389.45C7.10639 1329.25 17.6266 1252.67 23.587 1205.24C31.5568 1141.81 35.5957 1103.76 44.1315 1027.24C50.267 972.237 69.7391 885.697 83.7503 820.202C106.709 712.882 120.164 666.139 122.123 653.708C123.391 645.661 123.082 633.817 134.082 586.585C145.081 539.354 166.854 457.026 183.134 404.209C206.176 329.457 220.307 303.858 229.021 259.546C236.725 220.372 253.841 147.884 269.911 88.2338C298.193 -16.7431 318.461 -65.4484 320.967 -72.9922C331.673 -105.221 351.637 -164.056 358.629 -184.24C364.646 -203.054 367.527 -216.656 368.086 -224.384C368.63 -228.41 369.704 -232.648 376 -240" stroke-width="2" stroke-linecap="round"/>
+                    <text><textPath href="#line2">The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • The size of it made us all laugh. • </textPath></text>
+                </svg>
+                <!-- Line 3: I peeled it and shared it with Robert and Dave— -->
+                <svg class="line-svg" width="124" height="1024" viewBox="0 0 124 1024" style="left: 120px; top: 0;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><path id="line3" d="M10.7726 1646C10.6228 1645.85 10.4729 1645.7 10.2038 1579.9C9.93464 1514.11 9.55071 1382.67 7.88276 1302.29C6.21482 1221.91 3.27449 1196.57 1.89555 1160.28C0.516614 1123.99 0.788173 1077.51 2.31161 1041.31C3.83506 1005.11 6.60215 980.59 8.39282 942.99C10.1835 905.39 10.9139 855.453 14.3358 790.313C17.7578 725.173 23.8491 646.343 27.6918 602.64C31.5344 558.936 32.9437 552.747 36.5023 489.42C40.061 426.092 45.7262 305.813 51.3252 227.995C56.9242 150.176 62.2851 118.463 66.222 87.499C73.8585 27.4371 80.334 -25.7623 89.2743 -62.3502C95.9972 -89.8633 101.153 -109.987 102.971 -137.752C108.11 -173.83 115.416 -206.379 118.307 -222.287C119.138 -226.317 120.314 -230.615 123 -238"/></defs>
+                    <path class="path-stroke" d="M10.7726 1646C10.6228 1645.85 10.4729 1645.7 10.2038 1579.9C9.93464 1514.11 9.55071 1382.67 7.88276 1302.29C6.21482 1221.91 3.27449 1196.57 1.89555 1160.28C0.516614 1123.99 0.788173 1077.51 2.31161 1041.31C3.83506 1005.11 6.60215 980.59 8.39282 942.99C10.1835 905.39 10.9139 855.453 14.3358 790.313C17.7578 725.173 23.8491 646.343 27.6918 602.64C31.5344 558.936 32.9437 552.747 36.5023 489.42C40.061 426.092 45.7262 305.813 51.3252 227.995C56.9242 150.176 62.2851 118.463 66.222 87.499C73.8585 27.4371 80.334 -25.7623 89.2743 -62.3502C95.9972 -89.8633 101.153 -109.987 102.971 -137.752C108.11 -173.83 115.416 -206.379 118.307 -222.287C119.138 -226.317 120.314 -230.615 123 -238" stroke-width="2" stroke-linecap="round"/>
+                    <text><textPath href="#line3">I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • I peeled it and shared it with Robert and Dave— • </textPath></text>
+                </svg>
+                <!-- Line 4: They got quarters and I had a half. -->
+                <svg class="line-svg" width="119" height="1024" viewBox="0 0 119 1024" style="left: 1180px; top: 0;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><path id="line4" d="M88.0654 1660C88.0654 1659.72 88.4499 1650.07 93.9845 1599.93C98.4785 1559.21 109.038 1487.81 114.009 1425.02C118.98 1362.22 118.717 1310.28 116.415 1139.13C114.114 967.979 109.781 679.19 101.83 499.181C93.8792 319.172 82.4419 256.694 76.0482 213.317C69.6545 169.939 68.6509 147.555 64.4013 108.824C60.1516 70.0923 52.6862 15.6924 48.8403 -20.1633C40.4632 -98.2656 28.772 -126.704 23.188 -148.232C12.0511 -193.972 9.45203 -205.621 6.19245 -213.071C4.51317 -216.733 2.7828 -220.155 1 -229"/></defs>
+                    <path class="path-stroke" d="M88.0654 1660C88.0654 1659.72 88.4499 1650.07 93.9845 1599.93C98.4785 1559.21 109.038 1487.81 114.009 1425.02C118.98 1362.22 118.717 1310.28 116.415 1139.13C114.114 967.979 109.781 679.19 101.83 499.181C93.8792 319.172 82.4419 256.694 76.0482 213.317C69.6545 169.939 68.6509 147.555 64.4013 108.824C60.1516 70.0923 52.6862 15.6924 48.8403 -20.1633C40.4632 -98.2656 28.772 -126.704 23.188 -148.232C12.0511 -193.972 9.45203 -205.621 6.19245 -213.071C4.51317 -216.733 2.7828 -220.155 1 -229" stroke-width="2" stroke-linecap="round"/>
+                    <text><textPath href="#line4">They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • They got quarters and I had a half. • </textPath></text>
+                </svg>
+                <!-- Line 5: And that orange, it made me so happy, -->
+                <svg class="line-svg" width="266" height="1024" viewBox="0 0 266 1024" style="left: 620px; top: 0;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><path id="line5" d="M261.254 1599C261.254 1598.58 261.254 1598.16 262.118 1447.65C262.983 1297.13 264.712 996.52 264.971 837.469C265.23 678.418 263.966 670.033 252.883 633.007C241.8 595.982 220.936 530.57 210.085 491.355C191.659 424.766 179.972 381.742 155.07 319.187C128.054 251.324 126.807 192.687 123.721 160.185C121.252 134.175 100.513 73.1245 75.1429 -10.1059C53.6404 -80.6481 49.9705 -119.893 38.1325 -155.56C32.1823 -173.488 27.2432 -189.076 18.4411 -203.454C16.197 -206.805 13.965 -209.972 11.6897 -213.263C9.41449 -216.553 7.16367 -219.871 1 -227"/></defs>
+                    <path class="path-stroke" d="M261.254 1599C261.254 1598.58 261.254 1598.16 262.118 1447.65C262.983 1297.13 264.712 996.52 264.971 837.469C265.23 678.418 263.966 670.033 252.883 633.007C241.8 595.982 220.936 530.57 210.085 491.355C191.659 424.766 179.972 381.742 155.07 319.187C128.054 251.324 126.807 192.687 123.721 160.185C121.252 134.175 100.513 73.1245 75.1429 -10.1059C53.6404 -80.6481 49.9705 -119.893 38.1325 -155.56C32.1823 -173.488 27.2432 -189.076 18.4411 -203.454C16.197 -206.805 13.965 -209.972 11.6897 -213.263C9.41449 -216.553 7.16367 -219.871 1 -227" stroke-width="2" stroke-linecap="round"/>
+                    <text><textPath href="#line5">And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • And that orange, it made me so happy, • </textPath></text>
+                </svg>
+                <!-- Line 6: As ordinary things often do (long path) -->
+                <svg class="line-svg" width="1363" height="1024" viewBox="0 0 1363 1024" style="left: 38px; top: 0;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><path id="line6" d="M1057.15 -230C1057.15 -227.25 1058.24 -221.296 1077.65 -186.68C1094.88 -155.96 1131.5 -101.12 1182.12 -27.2572C1232.75 46.6057 1297.39 137.169 1335.2 189.461C1381.47 253.444 1391.78 286.45 1394.23 327.731C1395.38 347.277 1399.75 363.704 1412.25 402.873C1424.75 442.041 1446.12 503.383 1466.37 580.317C1486.62 657.251 1505.11 747.918 1515.18 803.377C1528.38 876.001 1527.86 902.768 1531.38 936.035C1534.01 960.966 1540.44 1002 1543.53 1071.08C1546.62 1140.16 1546.71 1235.98 1544.34 1296.41C1539.8 1412.35 1517.73 1439.1 1508.2 1451.11C1492.61 1470.74 1460.38 1484.11 1436.42 1501.56C1420.99 1512.79 1403.9 1523.46 1375.74 1539.65C1325.9 1568.3 1273.67 1591.11 1240.74 1601.62C1223 1607.28 1208.61 1607.24 1182.63 1609.93C1139.7 1614.37 1075.81 1626.47 1005.65 1632.6C949.622 1637.5 899.431 1643.04 852.164 1649.29C812.217 1654.57 786.44 1652.34 754.325 1653.58C728.994 1654.55 685.262 1654 642.004 1650.14C556.824 1642.55 503.034 1626.32 479.401 1616.79C437.788 1600.01 419.928 1597.44 370.003 1587.14C335.172 1579.95 278.342 1564.05 250.409 1556.65C220.319 1548.68 199.719 1539.34 177.188 1534.15C149.407 1527.74 130.488 1509.5 112.294 1498C97.0022 1488.34 84.7068 1476.81 71.9885 1466.52C59.4583 1456.37 56.0032 1438.18 49.1935 1416.94C38.3553 1383.13 22.8246 1345.49 16.577 1287.18C12.0101 1244.55 11.2958 1174.88 8.91192 1131C6.52804 1087.12 4.20592 1071.01 2.81734 1040.58C-0.588115 965.96 1.17317 914.609 4.9575 890.001C18.9965 798.712 29.1625 777.253 34.457 749.376C40.8424 715.754 51.9754 695.023 57.7195 676.258C68.1765 647.205 74.0926 630.004 81.7737 610.941C83.8403 606.062 85.8903 601.172 93.049 587.858"/></defs>
+                    <path class="path-stroke" d="M1057.15 -230C1057.15 -227.25 1058.24 -221.296 1077.65 -186.68C1094.88 -155.96 1131.5 -101.12 1182.12 -27.2572C1232.75 46.6057 1297.39 137.169 1335.2 189.461C1381.47 253.444 1391.78 286.45 1394.23 327.731C1395.38 347.277 1399.75 363.704 1412.25 402.873C1424.75 442.041 1446.12 503.383 1466.37 580.317C1486.62 657.251 1505.11 747.918 1515.18 803.377C1528.38 876.001 1527.86 902.768 1531.38 936.035C1534.01 960.966 1540.44 1002 1543.53 1071.08C1546.62 1140.16 1546.71 1235.98 1544.34 1296.41C1539.8 1412.35 1517.73 1439.1 1508.2 1451.11C1492.61 1470.74 1460.38 1484.11 1436.42 1501.56C1420.99 1512.79 1403.9 1523.46 1375.74 1539.65C1325.9 1568.3 1273.67 1591.11 1240.74 1601.62C1223 1607.28 1208.61 1607.24 1182.63 1609.93C1139.7 1614.37 1075.81 1626.47 1005.65 1632.6C949.622 1637.5 899.431 1643.04 852.164 1649.29C812.217 1654.57 786.44 1652.34 754.325 1653.58C728.994 1654.55 685.262 1654 642.004 1650.14C556.824 1642.55 503.034 1626.32 479.401 1616.79C437.788 1600.01 419.928 1597.44 370.003 1587.14C335.172 1579.95 278.342 1564.05 250.409 1556.65C220.319 1548.68 199.719 1539.34 177.188 1534.15C149.407 1527.74 130.488 1509.5 112.294 1498C97.0022 1488.34 84.7068 1476.81 71.9885 1466.52C59.4583 1456.37 56.0032 1438.18 49.1935 1416.94C38.3553 1383.13 22.8246 1345.49 16.577 1287.18C12.0101 1244.55 11.2958 1174.88 8.91192 1131C6.52804 1087.12 4.20592 1071.01 2.81734 1040.58C-0.588115 965.96 1.17317 914.609 4.9575 890.001C18.9965 798.712 29.1625 777.253 34.457 749.376C40.8424 715.754 51.9754 695.023 57.7195 676.258C68.1765 647.205 74.0926 630.004 81.7737 610.941C83.8403 606.062 85.8903 601.172 93.049 587.858" stroke-width="2" stroke-linecap="round"/>
+                    <text><textPath href="#line6">As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • As ordinary things often do • </textPath></text>
+                </svg>
+                <!-- Line 7: Just lately. The shopping. A walk in the park. -->
+                <svg class="line-svg" width="942" height="308" viewBox="0 0 942 308" style="left: 249px; top: 15px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><path id="line7" d="M1 36.625C7.06327 41.788 44.2843 74.6283 74.8863 106.832C106.464 140.062 140.025 162.416 211.689 190.423C274.264 214.877 391.987 255.028 458.874 277.908C538.333 305.088 578.424 307.497 625.301 306.932C660.052 306.513 700.765 292.32 753.096 272.695C838.012 240.85 851.889 212.52 865.768 194.176C895.636 154.701 912.299 92.7739 921.253 68.0768C923.109 62.1776 924.236 58.0261 927.173 47.7907C930.109 37.5553 934.822 21.3618 941 1"/></defs>
+                    <path class="path-stroke" d="M1 36.625C7.06327 41.788 44.2843 74.6283 74.8863 106.832C106.464 140.062 140.025 162.416 211.689 190.423C274.264 214.877 391.987 255.028 458.874 277.908C538.333 305.088 578.424 307.497 625.301 306.932C660.052 306.513 700.765 292.32 753.096 272.695C838.012 240.85 851.889 212.52 865.768 194.176C895.636 154.701 912.299 92.7739 921.253 68.0768C923.109 62.1776 924.236 58.0261 927.173 47.7907C930.109 37.5553 934.822 21.3618 941 1" stroke-width="2" stroke-linecap="round"/>
+                    <text><textPath href="#line7">Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • Just lately. The shopping. A walk in the park. • </textPath></text>
+                </svg>
+                <!-- Line 8: This is peace and contentment. It's new. -->
+                <svg class="line-svg" width="942" height="149" viewBox="0 0 942 149" style="left: 249px; top: 680px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><path id="line8" d="M1 -122.375C7.06327 -117.212 44.2843 -84.3717 74.8863 -52.1682C106.464 -18.9383 140.025 3.41624 211.689 31.4226C274.264 55.8767 391.987 96.0284 458.874 118.908C538.333 146.088 578.424 148.497 625.301 147.932C660.052 147.513 700.765 133.32 753.096 113.695C838.012 81.8503 851.889 53.5195 865.768 35.1762C895.636 -4.29868 912.299 -66.2261 921.253 -90.9232C923.109 -96.8224 924.236 -100.974 927.173 -111.209C930.109 -121.445 934.822 -137.638 941 -158"/></defs>
+                    <path class="path-stroke" d="M1 -122.375C7.06327 -117.212 44.2843 -84.3717 74.8863 -52.1682C106.464 -18.9383 140.025 3.41624 211.689 31.4226C274.264 55.8767 391.987 96.0284 458.874 118.908C538.333 146.088 578.424 148.497 625.301 147.932C660.052 147.513 700.765 133.32 753.096 113.695C838.012 81.8503 851.889 53.5195 865.768 35.1762C895.636 -4.29868 912.299 -66.2261 921.253 -90.9232C923.109 -96.8224 924.236 -100.974 927.173 -111.209C930.109 -121.445 934.822 -137.638 941 -158" stroke-width="2" stroke-linecap="round"/>
+                    <text><textPath href="#line8">This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • This is peace and contentment. It's new. • </textPath></text>
+                </svg>
+                <!-- Line 9: The rest of the day was quite easy. -->
+                <svg class="line-svg" width="1210" height="398" viewBox="0 0 1210 398" style="left: 115px; top: 455px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><path id="line9" d="M1 27.4412C10.1644 33.7529 49.6298 57.9529 102.916 83.9845C133.183 98.7704 171.846 112.823 214.159 136.587C256.473 160.351 301.737 192.395 342.147 219.805C382.557 247.214 416.742 269.019 478.05 297.935C539.357 326.851 626.752 362.217 674.949 380.614C723.146 399.011 729.497 399.367 759.055 393.979C788.613 388.591 841.185 377.447 874.946 369.384C922.416 358.048 952.914 343.533 991.462 321.658C1040.74 293.696 1075.37 259.28 1096.72 235.87C1135.27 193.596 1161.62 152.841 1199.94 94.6759C1223.48 58.9582 1239.06 37.0126 1248.16 22.7354C1250.14 19.5874 1251.88 16.4055 1253.7 13.1496C1255.52 9.89374 1257.37 6.6603 1264 1"/></defs>
+                    <path class="path-stroke" d="M1 27.4412C10.1644 33.7529 49.6298 57.9529 102.916 83.9845C133.183 98.7704 171.846 112.823 214.159 136.587C256.473 160.351 301.737 192.395 342.147 219.805C382.557 247.214 416.742 269.019 478.05 297.935C539.357 326.851 626.752 362.217 674.949 380.614C723.146 399.011 729.497 399.367 759.055 393.979C788.613 388.591 841.185 377.447 874.946 369.384C922.416 358.048 952.914 343.533 991.462 321.658C1040.74 293.696 1075.37 259.28 1096.72 235.87C1135.27 193.596 1161.62 152.841 1199.94 94.6759C1223.48 58.9582 1239.06 37.0126 1248.16 22.7354C1250.14 19.5874 1251.88 16.4055 1253.7 13.1496C1255.52 9.89374 1257.37 6.6603 1264 1" stroke-width="2" stroke-linecap="round"/>
+                    <text><textPath href="#line9">The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • The rest of the day was quite easy. • </textPath></text>
+                </svg>
+                <!-- Line 10: I did all the jobs on my list -->
+                <svg class="line-svg" width="1348" height="231" viewBox="0 0 1348 231" style="left: 46px; top: 230px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><path id="line10" d="M1 27.7259C1.54438 27.7259 23.3279 46.0128 77.9535 84.5228C109.672 106.884 155.166 126.351 239.075 153.417C322.985 180.482 445.377 212.353 514.021 230.867C582.666 249.38 593.854 253.572 630.863 263.328C667.872 273.084 730.364 288.278 786.084 297.088C841.805 305.899 888.861 307.865 915.157 307.994C941.454 308.122 945.565 306.353 974.703 296.598C1003.84 286.843 1057.88 269.157 1099.32 256.078C1140.77 242.998 1167.98 235.061 1202.38 221.326C1236.78 207.592 1277.55 188.301 1307.77 172.566C1357.24 146.8 1385.95 126.909 1405.35 114.564C1449.42 86.535 1492.54 34.7859 1503.42 18.4012C1505.17 15.1241 1506.86 11.8244 1509.51 9.00975C1512.16 6.19513 1515.71 3.9656 1525 1"/></defs>
+                    <path class="path-stroke" d="M1 27.7259C1.54438 27.7259 23.3279 46.0128 77.9535 84.5228C109.672 106.884 155.166 126.351 239.075 153.417C322.985 180.482 445.377 212.353 514.021 230.867C582.666 249.38 593.854 253.572 630.863 263.328C667.872 273.084 730.364 288.278 786.084 297.088C841.805 305.899 888.861 307.865 915.157 307.994C941.454 308.122 945.565 306.353 974.703 296.598C1003.84 286.843 1057.88 269.157 1099.32 256.078C1140.77 242.998 1167.98 235.061 1202.38 221.326C1236.78 207.592 1277.55 188.301 1307.77 172.566C1357.24 146.8 1385.95 126.909 1405.35 114.564C1449.42 86.535 1492.54 34.7859 1503.42 18.4012C1505.17 15.1241 1506.86 11.8244 1509.51 9.00975C1512.16 6.19513 1515.71 3.9656 1525 1" stroke-width="2" stroke-linecap="round"/>
+                    <text><textPath href="#line10">I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • I did all the jobs on my list • </textPath></text>
+                </svg>
+                <!-- Line 11: And enjoyed them and had some time over. -->
+                <svg class="line-svg" width="1348" height="309" viewBox="0 0 1348 309" style="left: 46px; top: 910px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><path id="line11" d="M1 27.7259C1.54438 27.7259 23.3279 46.0128 77.9535 84.5228C109.672 106.884 155.166 126.351 239.075 153.417C322.985 180.482 445.377 212.353 514.021 230.867C582.666 249.38 593.854 253.572 630.863 263.328C667.872 273.084 730.364 288.278 786.084 297.088C841.805 305.899 888.861 307.865 915.157 307.994C941.454 308.122 945.565 306.353 974.703 296.598C1003.84 286.843 1057.88 269.157 1099.32 256.078C1140.77 242.998 1167.98 235.061 1202.38 221.326C1236.78 207.592 1277.55 188.301 1307.77 172.566C1357.24 146.8 1385.95 126.909 1405.35 114.564C1449.42 86.535 1492.54 34.7859 1503.42 18.4012C1505.17 15.1241 1506.86 11.8244 1509.51 9.00975C1512.16 6.19513 1515.71 3.9656 1525 1"/></defs>
+                    <path class="path-stroke" d="M1 27.7259C1.54438 27.7259 23.3279 46.0128 77.9535 84.5228C109.672 106.884 155.166 126.351 239.075 153.417C322.985 180.482 445.377 212.353 514.021 230.867C582.666 249.38 593.854 253.572 630.863 263.328C667.872 273.084 730.364 288.278 786.084 297.088C841.805 305.899 888.861 307.865 915.157 307.994C941.454 308.122 945.565 306.353 974.703 296.598C1003.84 286.843 1057.88 269.157 1099.32 256.078C1140.77 242.998 1167.98 235.061 1202.38 221.326C1236.78 207.592 1277.55 188.301 1307.77 172.566C1357.24 146.8 1385.95 126.909 1405.35 114.564C1449.42 86.535 1492.54 34.7859 1503.42 18.4012C1505.17 15.1241 1506.86 11.8244 1509.51 9.00975C1512.16 6.19513 1515.71 3.9656 1525 1" stroke-width="2" stroke-linecap="round"/>
+                    <text><textPath href="#line11">And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • And enjoyed them and had some time over. • </textPath></text>
+                </svg>
+                <!-- Line 12: I love you. I'm glad I exist. -->
+                <svg class="line-svg" width="1348" height="309" viewBox="0 0 1348 309" style="left: 46px; top: 1160px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><path id="line12" d="M1 27.7259C1.54438 27.7259 23.3279 46.0128 77.9535 84.5228C109.672 106.884 155.166 126.351 239.075 153.417C322.985 180.482 445.377 212.353 514.021 230.867C582.666 249.38 593.854 253.572 630.863 263.328C667.872 273.084 730.364 288.278 786.084 297.088C841.805 305.899 888.861 307.865 915.157 307.994C941.454 308.122 945.565 306.353 974.703 296.598C1003.84 286.843 1057.88 269.157 1099.32 256.078C1140.77 242.998 1167.98 235.061 1202.38 221.326C1236.78 207.592 1277.55 188.301 1307.77 172.566C1357.24 146.8 1385.95 126.909 1405.35 114.564C1449.42 86.535 1492.54 34.7859 1503.42 18.4012C1505.17 15.1241 1506.86 11.8244 1509.51 9.00975C1512.16 6.19513 1515.71 3.9656 1525 1"/></defs>
+                    <path class="path-stroke" d="M1 27.7259C1.54438 27.7259 23.3279 46.0128 77.9535 84.5228C109.672 106.884 155.166 126.351 239.075 153.417C322.985 180.482 445.377 212.353 514.021 230.867C582.666 249.38 593.854 253.572 630.863 263.328C667.872 273.084 730.364 288.278 786.084 297.088C841.805 305.899 888.861 307.865 915.157 307.994C941.454 308.122 945.565 306.353 974.703 296.598C1003.84 286.843 1057.88 269.157 1099.32 256.078C1140.77 242.998 1167.98 235.061 1202.38 221.326C1236.78 207.592 1277.55 188.301 1307.77 172.566C1357.24 146.8 1385.95 126.909 1405.35 114.564C1449.42 86.535 1492.54 34.7859 1503.42 18.4012C1505.17 15.1241 1506.86 11.8244 1509.51 9.00975C1512.16 6.19513 1515.71 3.9656 1525 1" stroke-width="2" stroke-linecap="round"/>
+                    <text><textPath href="#line12">I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • I love you. I'm glad I exist. • </textPath></text>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <script>
+        function scaleToFit() {
+            const wrapper = document.querySelector('.content-wrapper');
+            const navbarWidth = window.innerWidth <= 600 ? 0 : 240;
+            // Use full viewport width for scaling to zoom in more
+            const fullWidth = window.innerWidth;
+            // Content extends to about 1470px height (line 12 at top: 1160px + height ~309px)
+            const contentHeight = 1470;
+            const scaleX = fullWidth / 1440;
+            const scaleY = window.innerHeight / contentHeight;
+            const scale = Math.min(scaleX, scaleY) * 1.05; // Zoom in 5% more, ensuring all lines visible
+
+            // Position so part goes behind navbar
+            const scaledWidth = 1440 * scale;
+            const scaledHeight = contentHeight * scale;
+            // Offset to allow content to extend into navbar area, but ensure all content is visible
+            // Shift more to the right
+            const offsetX = (fullWidth - scaledWidth) / 2 - (navbarWidth * 0.1) + 100;
+            // Center vertically but ensure bottom content is visible - don't let it go below viewport
+            const maxOffsetY = window.innerHeight - scaledHeight;
+            const offsetY = Math.max(maxOffsetY, Math.min(0, (window.innerHeight - scaledHeight) / 2));
+
+            wrapper.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+        }
+        scaleToFit();
+        window.addEventListener('resize', scaleToFit);
+    </script>
+</body>
+</html>

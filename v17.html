@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange Poem - Rotating Circle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+            background: #1940F4;
+        }
+        .container {
+            width: calc(100% - 240px);
+            height: 100vh;
+            position: relative;
+            background: transparent;
+            overflow: visible;
+            margin-left: 240px;
+            display: flex;
+            align-items: flex-end;
+        }
+        @keyframes rotateText {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+        .rotating-text {
+            animation: rotateText 60s linear infinite;
+            transform-origin: 800px 800px;
+        }
+
+.navbar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar::after {
+    content: '';
+    position: fixed;
+    left: 240px;
+    top: 0;
+    width: 1px;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+}
+
+html, body {
+    padding-left: 0;
+}
+
+
+.navbar-bg {
+    width: 240px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: #1940F4;
+}
+
+.navbar-logo {
+    width: 150px;
+    height: 120px;
+    left: 20px;
+    top: 40px;
+    position: absolute;
+    transform: rotate(-18deg);
+    transform-origin: top left;
+    overflow: visible;
+}
+
+.navbar-logo-text {
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    line-height: 20px;
+    position: absolute;
+    left: 20px;
+    top: 35px;
+    width: 100px;
+}
+
+.navbar-section {
+    width: 120px;
+    left: 50px;
+    position: absolute;
+}
+
+.navbar-section-title {
+    color: white;
+    font-size: 16px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 8px;
+}
+
+@keyframes rotateEllipse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.navbar-logo svg {
+    animation: rotateEllipse 20s linear infinite;
+    transform-origin: center center;
+}
+
+.navbar-section-items a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.navbar-section-items a:hover {
+    color: #FF9B5C;
+}
+
+.navbar-section-items a.active {
+    color: #FF9B5C;
+    font-weight: 700;
+}
+
+.navbar-section-items {
+    color: white;
+    font-size: 12px;
+    font-family: IBM Plex Mono;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.navbar-divider {
+    width: 240px;
+    height: 0;
+    left: 0;
+    position: absolute;
+    border-top: 1px white solid;
+    
+}
+
+@media (max-height: 700px) {
+    .navbar {
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    html, body {
+        padding-left: 0;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-bg"></div>
+        <div class="navbar-logo">
+            <div class="navbar-logo-text">The Orange</div>
+            <svg width="130" height="110" style="position: absolute; left: 0; top: 0;">
+                <defs>
+                    <path id="ellipsePath" d="M 65,8 a 60,48 0 1,1 -1,0" fill="none"/>
+                </defs>
+                <text fill="white" font-size="8" font-family="IBM Plex Mono, monospace" font-weight="500">
+                    <textPath href="#ellipsePath" startOffset="0%">
+                        A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE •
+                    </textPath>
+                </text>
+            </svg>
+        </div>
+        <div class="navbar-divider" style="top: 160px;"></div>
+        <div class="navbar-section" style="top: 170px;">
+            <span class="navbar-section-title">Oranges</span>
+            <span class="navbar-section-items"><a href="v1.html">1.1 Space</a><br/><a href="v2.html">1.2 Peel</a><br/><a href="v3.html">1.3 Whole</a><br/><a href="v4.html">1.4 Slice</a></span>
+        </div>
+        <div class="navbar-divider" style="top: 290px;"></div>
+        <div class="navbar-section" style="top: 300px;">
+            <span class="navbar-section-title">Sharing</span>
+            <span class="navbar-section-items"><a href="v5.html">2.1 Ripple</a><br/><a href="v6.html">2.2 Bag</a><br/><a href="v7.html">2.3 Warmth</a><br/><a href="v8.html">2.4 Peeling</a></span>
+        </div>
+        <div class="navbar-divider" style="top: 420px;"></div>
+        <div class="navbar-section" style="top: 430px;">
+            <span class="navbar-section-title">Attention</span>
+            <span class="navbar-section-items"><a href="v9.html">3.1 Huge Orange</a><br/><a href="v10.html">3.2 Details</a><br/><a href="v11.html">3.3 Exist</a><br/><a href="v12.html">3.4 Stickers</a></span>
+        </div>
+        <div class="navbar-divider" style="top: 550px;"></div>
+        <div class="navbar-section" style="top: 560px;">
+            <span class="navbar-section-title">Play</span>
+            <span class="navbar-section-items"><a href="v13.html">4.1 Search</a><br/><a href="v14.html">4.2 Connect</a><br/><a href="v15.html">4.3 Crossword</a><br/><a href="v16.html">4.4 Search</a></span>
+        </div>
+        <div class="navbar-divider" style="top: 680px;"></div>
+        <div class="navbar-section" style="top: 690px;">
+            <span class="navbar-section-title">Flow</span>
+            <span class="navbar-section-items"><a href="v17.html" class="active">5.1 Day</a><br/><a href="v18.html">5.2 Direction</a><br/><a href="v19.html">5.3 Perspective</a><br/><a href="v20.html">5.4 Alphabet Soup</a></span>
+        </div>
+    </div>
+    <div class="container">
+        <svg width="1600" height="800">
+            <defs>
+                <path id="circlePath"
+                      d="M 800 800
+                         m -780, 0
+                         a 780,780 0 1,1 1560,0
+                         a 780,780 0 1,1 -1560,0"
+                      fill="none"/>
+            </defs>
+
+            <g class="rotating-text" style="transform-origin: 800px 800px;">
+                <circle cx="800" cy="800" r="780" fill="none" stroke="transparent" stroke-width="1"/>
+                <text fill="white" font-size="23.5" font-family="Cooper Md BT, Georgia, serif" font-weight="400">
+                    <textPath href="#circlePath" startOffset="0%">
+                        At lunchtime I bought a huge orange— The size of it made us all laugh. I peeled it and shared it with Robert and Dave— They got quarters and I had a half. ✦ And that orange, it made me so happy, As ordinary things often do Just lately. The shopping. A walk in the park. This is peace and contentment. It's new. ✦ The rest of the day was quite easy. I did all the jobs on my list And enjoyed them and had some time over. I love you. I'm glad I exist. ✦
+                    </textPath>
+                </text>
+            </g>
+        </svg>
+    </div>
+    <script>
+        function scaleToFit() {
+            const container = document.querySelector('.container');
+            const svg = container.querySelector('svg');
+            const navbarWidth = window.innerWidth <= 600 ? 0 : 240;
+            const availableWidth = window.innerWidth - navbarWidth;
+            
+            // Scale SVG to fit width while maintaining aspect ratio
+            const svgWidth = 1600;
+            const svgHeight = 800;
+            const scale = availableWidth / svgWidth;
+            const scaledHeight = svgHeight * scale;
+            const scaledWidth = svgWidth * scale;
+            
+            // Center horizontally at the bottom, slightly shifted right
+            svg.style.position = 'absolute';
+            svg.style.left = `${(availableWidth - scaledWidth) / 2 + 20}px`;
+            svg.style.bottom = '0';
+            svg.style.top = 'auto';
+            
+            svg.style.width = `${availableWidth}px`;
+            svg.style.height = `${scaledHeight}px`;
+        }
+        scaleToFit();
+        window.addEventListener('resize', scaleToFit);
+
+        // Reset animation to start from beginning on page load
+        const rotatingText = document.querySelector('.rotating-text');
+        rotatingText.style.animation = 'none';
+        rotatingText.offsetHeight; // Trigger reflow
+        rotatingText.style.animation = '';
+    </script>
+</body>
+</html>

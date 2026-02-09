@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ripple Text Design</title>
+    <style>
+        @font-face {
+            font-family: 'Cooper Md BT';
+            src: url('Cooper Md BT Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background: #1940F4;
+        }
+
+        .container {
+            width: calc(100% - 240px);
+            height: 100vh;
+            position: relative;
+            background: transparent;
+            overflow: hidden;
+            margin-left: 240px;
+        }
+        .content-wrapper {
+            width: 1440px;
+            height: 1024px;
+            position: absolute;
+            transform-origin: top left;
+            left: 0;
+            top: 0;
+        }
+        
+        .line {
+            position: absolute;
+            font-family: 'Cooper Md BT', serif;
+            font-size: 11px;
+            color: white;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+        
+        /* Opacity classes */
+        .opacity-1 { opacity: 1; }
+        .opacity-2 { opacity: 0.85; }
+        .opacity-3 { opacity: 0.7; }
+        .opacity-4 { opacity: 0.55; }
+        .opacity-5 { opacity: 0.4; }
+        .opacity-6 { opacity: 0.25; }
+        
+        /* Row 1 - First stanza - Left side (curves opening right) - MORE SPACING */
+        .row1-left1-1 { top: 180px; left: 600px; }
+        .row1-left1-2 { top: 200px; left: 595px; }
+        .row1-left1-3 { top: 220px; left: 593px; }
+        .row1-left1-4 { top: 240px; left: 592px; }
+        .row1-left1-5 { top: 260px; left: 593px; }
+        .row1-left1-6 { top: 300px; left: 595px; }
+        .row1-left1-7 { top: 300px; left: 600px; }
+        
+        .row1-left2-1 { top: 180px; left: 520px; }
+        .row1-left2-2 { top: 200px; left: 510px; }
+        .row1-left2-3 { top: 220px; left: 505px; }
+        .row1-left2-4 { top: 240px; left: 502px; }
+        .row1-left2-5 { top: 260px; left: 505px; }
+        .row1-left2-6 { top: 300px; left: 510px; }
+        .row1-left2-7 { top: 300px; left: 520px; }
+        
+        .row1-left3-1 { top: 180px; left: 440px; }
+        .row1-left3-2 { top: 200px; left: 425px; }
+        .row1-left3-3 { top: 220px; left: 417px; }
+        .row1-left3-4 { top: 240px; left: 412px; }
+        .row1-left3-5 { top: 260px; left: 417px; }
+        .row1-left3-6 { top: 300px; left: 425px; }
+        .row1-left3-7 { top: 300px; left: 440px; }
+        
+        .row1-left4-1 { top: 180px; left: 360px; }
+        .row1-left4-2 { top: 200px; left: 340px; }
+        .row1-left4-3 { top: 220px; left: 329px; }
+        .row1-left4-4 { top: 240px; left: 322px; }
+        .row1-left4-5 { top: 260px; left: 329px; }
+        .row1-left4-6 { top: 300px; left: 340px; }
+        .row1-left4-7 { top: 300px; left: 360px; }
+        
+        .row1-left5-1 { top: 180px; left: 280px; }
+        .row1-left5-2 { top: 200px; left: 255px; }
+        .row1-left5-3 { top: 220px; left: 241px; }
+        .row1-left5-4 { top: 240px; left: 232px; }
+        .row1-left5-5 { top: 260px; left: 241px; }
+        .row1-left5-6 { top: 300px; left: 255px; }
+        .row1-left5-7 { top: 300px; left: 280px; }
+        
+        .row1-left6-1 { top: 180px; left: 200px; }
+        .row1-left6-2 { top: 200px; left: 170px; }
+        .row1-left6-3 { top: 220px; left: 153px; }
+        .row1-left6-4 { top: 240px; left: 142px; }
+        .row1-left6-5 { top: 260px; left: 153px; }
+        .row1-left6-6 { top: 300px; left: 170px; }
+        .row1-left6-7 { top: 300px; left: 200px; }
+        
+        /* Row 1 - First stanza - Right side (curves opening left) */
+        .row1-right1-1 { top: 180px; right: 600px; text-align: right; }
+        .row1-right1-2 { top: 200px; right: 595px; text-align: right; }
+        .row1-right1-3 { top: 220px; right: 593px; text-align: right; }
+        .row1-right1-4 { top: 240px; right: 592px; text-align: right; }
+        .row1-right1-5 { top: 260px; right: 593px; text-align: right; }
+        .row1-right1-6 { top: 300px; right: 595px; text-align: right; }
+        .row1-right1-7 { top: 300px; right: 600px; text-align: right; }
+        
+        .row1-right2-1 { top: 180px; right: 520px; text-align: right; }
+        .row1-right2-2 { top: 200px; right: 510px; text-align: right; }
+        .row1-right2-3 { top: 220px; right: 505px; text-align: right; }
+        .row1-right2-4 { top: 240px; right: 502px; text-align: right; }
+        .row1-right2-5 { top: 260px; right: 505px; text-align: right; }
+        .row1-right2-6 { top: 300px; right: 510px; text-align: right; }
+        .row1-right2-7 { top: 300px; right: 520px; text-align: right; }
+        
+        .row1-right3-1 { top: 180px; right: 440px; text-align: right; }
+        .row1-right3-2 { top: 200px; right: 425px; text-align: right; }
+        .row1-right3-3 { top: 220px; right: 417px; text-align: right; }
+        .row1-right3-4 { top: 240px; right: 412px; text-align: right; }
+        .row1-right3-5 { top: 260px; right: 417px; text-align: right; }
+        .row1-right3-6 { top: 300px; right: 425px; text-align: right; }
+        .row1-right3-7 { top: 300px; right: 440px; text-align: right; }
+        
+        .row1-right4-1 { top: 180px; right: 360px; text-align: right; }
+        .row1-right4-2 { top: 200px; right: 340px; text-align: right; }
+        .row1-right4-3 { top: 220px; right: 329px; text-align: right; }
+        .row1-right4-4 { top: 240px; right: 322px; text-align: right; }
+        .row1-right4-5 { top: 260px; right: 329px; text-align: right; }
+        .row1-right4-6 { top: 300px; right: 340px; text-align: right; }
+        .row1-right4-7 { top: 300px; right: 360px; text-align: right; }
+        
+        .row1-right5-1 { top: 180px; right: 280px; text-align: right; }
+        .row1-right5-2 { top: 200px; right: 255px; text-align: right; }
+        .row1-right5-3 { top: 220px; right: 241px; text-align: right; }
+        .row1-right5-4 { top: 240px; right: 232px; text-align: right; }
+        .row1-right5-5 { top: 260px; right: 241px; text-align: right; }
+        .row1-right5-6 { top: 300px; right: 255px; text-align: right; }
+        .row1-right5-7 { top: 300px; right: 280px; text-align: right; }
+        
+        .row1-right6-1 { top: 180px; right: 200px; text-align: right; }
+        .row1-right6-2 { top: 200px; right: 170px; text-align: right; }
+        .row1-right6-3 { top: 220px; right: 153px; text-align: right; }
+        .row1-right6-4 { top: 240px; right: 142px; text-align: right; }
+        .row1-right6-5 { top: 260px; right: 153px; text-align: right; }
+        .row1-right6-6 { top: 300px; right: 170px; text-align: right; }
+        .row1-right6-7 { top: 300px; right: 200px; text-align: right; }
+        
+        /* Row 2 - Second stanza */
+        .row2-left1-1 { top: 420px; left: 600px; }
+        .row2-left1-2 { top: 440px; left: 595px; }
+        .row2-left1-3 { top: 460px; left: 593px; }
+        .row2-left1-4 { top: 480px; left: 592px; }
+        .row2-left1-5 { top: 500px; left: 593px; }
+        .row2-left1-6 { top: 520px; left: 595px; }
+        .row2-left1-7 { top: 560px; left: 600px; }
+        
+        .row2-left2-1 { top: 420px; left: 520px; }
+        .row2-left2-2 { top: 440px; left: 510px; }
+        .row2-left2-3 { top: 460px; left: 505px; }
+        .row2-left2-4 { top: 480px; left: 502px; }
+        .row2-left2-5 { top: 500px; left: 505px; }
+        .row2-left2-6 { top: 520px; left: 510px; }
+        .row2-left2-7 { top: 560px; left: 520px; }
+        
+        .row2-left3-1 { top: 420px; left: 440px; }
+        .row2-left3-2 { top: 440px; left: 425px; }
+        .row2-left3-3 { top: 460px; left: 417px; }
+        .row2-left3-4 { top: 480px; left: 412px; }
+        .row2-left3-5 { top: 500px; left: 417px; }
+        .row2-left3-6 { top: 520px; left: 425px; }
+        .row2-left3-7 { top: 560px; left: 440px; }
+        
+        .row2-left4-1 { top: 420px; left: 360px; }
+        .row2-left4-2 { top: 440px; left: 340px; }
+        .row2-left4-3 { top: 460px; left: 329px; }
+        .row2-left4-4 { top: 480px; left: 322px; }
+        .row2-left4-5 { top: 500px; left: 329px; }
+        .row2-left4-6 { top: 520px; left: 340px; }
+        .row2-left4-7 { top: 560px; left: 360px; }
+        
+        .row2-left5-1 { top: 420px; left: 280px; }
+        .row2-left5-2 { top: 440px; left: 255px; }
+        .row2-left5-3 { top: 460px; left: 241px; }
+        .row2-left5-4 { top: 480px; left: 232px; }
+        .row2-left5-5 { top: 500px; left: 241px; }
+        .row2-left5-6 { top: 520px; left: 255px; }
+        .row2-left5-7 { top: 560px; left: 280px; }
+        
+        .row2-left6-1 { top: 420px; left: 200px; }
+        .row2-left6-2 { top: 440px; left: 170px; }
+        .row2-left6-3 { top: 460px; left: 153px; }
+        .row2-left6-4 { top: 480px; left: 142px; }
+        .row2-left6-5 { top: 500px; left: 153px; }
+        .row2-left6-6 { top: 520px; left: 170px; }
+        .row2-left6-7 { top: 560px; left: 200px; }
+        
+        .row2-right1-1 { top: 420px; right: 600px; text-align: right; }
+        .row2-right1-2 { top: 440px; right: 595px; text-align: right; }
+        .row2-right1-3 { top: 460px; right: 593px; text-align: right; }
+        .row2-right1-4 { top: 480px; right: 592px; text-align: right; }
+        .row2-right1-5 { top: 500px; right: 593px; text-align: right; }
+        .row2-right1-6 { top: 520px; right: 595px; text-align: right; }
+        .row2-right1-7 { top: 560px; right: 600px; text-align: right; }
+        
+        .row2-right2-1 { top: 420px; right: 520px; text-align: right; }
+        .row2-right2-2 { top: 440px; right: 510px; text-align: right; }
+        .row2-right2-3 { top: 460px; right: 505px; text-align: right; }
+        .row2-right2-4 { top: 480px; right: 502px; text-align: right; }
+        .row2-right2-5 { top: 500px; right: 505px; text-align: right; }
+        .row2-right2-6 { top: 520px; right: 510px; text-align: right; }
+        .row2-right2-7 { top: 560px; right: 520px; text-align: right; }
+        
+        .row2-right3-1 { top: 420px; right: 440px; text-align: right; }
+        .row2-right3-2 { top: 440px; right: 425px; text-align: right; }
+        .row2-right3-3 { top: 460px; right: 417px; text-align: right; }
+        .row2-right3-4 { top: 480px; right: 412px; text-align: right; }
+        .row2-right3-5 { top: 500px; right: 417px; text-align: right; }
+        .row2-right3-6 { top: 520px; right: 425px; text-align: right; }
+        .row2-right3-7 { top: 560px; right: 440px; text-align: right; }
+        
+        .row2-right4-1 { top: 420px; right: 360px; text-align: right; }
+        .row2-right4-2 { top: 440px; right: 340px; text-align: right; }
+        .row2-right4-3 { top: 460px; right: 329px; text-align: right; }
+        .row2-right4-4 { top: 480px; right: 322px; text-align: right; }
+        .row2-right4-5 { top: 500px; right: 329px; text-align: right; }
+        .row2-right4-6 { top: 520px; right: 340px; text-align: right; }
+        .row2-right4-7 { top: 560px; right: 360px; text-align: right; }
+        
+        .row2-right5-1 { top: 420px; right: 280px; text-align: right; }
+        .row2-right5-2 { top: 440px; right: 255px; text-align: right; }
+        .row2-right5-3 { top: 460px; right: 241px; text-align: right; }
+        .row2-right5-4 { top: 480px; right: 232px; text-align: right; }
+        .row2-right5-5 { top: 500px; right: 241px; text-align: right; }
+        .row2-right5-6 { top: 520px; right: 255px; text-align: right; }
+        .row2-right5-7 { top: 560px; right: 280px; text-align: right; }
+        
+        .row2-right6-1 { top: 420px; right: 200px; text-align: right; }
+        .row2-right6-2 { top: 440px; right: 170px; text-align: right; }
+        .row2-right6-3 { top: 460px; right: 153px; text-align: right; }
+        .row2-right6-4 { top: 480px; right: 142px; text-align: right; }
+        .row2-right6-5 { top: 500px; right: 153px; text-align: right; }
+        .row2-right6-6 { top: 520px; right: 170px; text-align: right; }
+        .row2-right6-7 { top: 560px; right: 200px; text-align: right; }
+        
+        /* Row 3 - Third stanza */
+        .row3-left1-1 { top: 680px; left: 600px; }
+        .row3-left1-2 { top: 680px; left: 595px; }
+        .row3-left1-3 { top: 700px; left: 593px; }
+        .row3-left1-4 { top: 720px; left: 592px; }
+        .row3-left1-5 { top: 740px; left: 593px; }
+        .row3-left1-6 { top: 760px; left: 595px; }
+        .row3-left1-7 { top: 780px; left: 600px; }
+        
+        .row3-left2-1 { top: 680px; left: 520px; }
+        .row3-left2-2 { top: 680px; left: 510px; }
+        .row3-left2-3 { top: 700px; left: 505px; }
+        .row3-left2-4 { top: 720px; left: 502px; }
+        .row3-left2-5 { top: 740px; left: 505px; }
+        .row3-left2-6 { top: 760px; left: 510px; }
+        .row3-left2-7 { top: 780px; left: 520px; }
+        
+        .row3-left3-1 { top: 680px; left: 440px; }
+        .row3-left3-2 { top: 680px; left: 425px; }
+        .row3-left3-3 { top: 700px; left: 417px; }
+        .row3-left3-4 { top: 720px; left: 412px; }
+        .row3-left3-5 { top: 740px; left: 417px; }
+        .row3-left3-6 { top: 760px; left: 425px; }
+        .row3-left3-7 { top: 780px; left: 440px; }
+        
+        .row3-left4-1 { top: 680px; left: 360px; }
+        .row3-left4-2 { top: 680px; left: 340px; }
+        .row3-left4-3 { top: 700px; left: 329px; }
+        .row3-left4-4 { top: 720px; left: 322px; }
+        .row3-left4-5 { top: 740px; left: 329px; }
+        .row3-left4-6 { top: 760px; left: 340px; }
+        .row3-left4-7 { top: 780px; left: 360px; }
+        
+        .row3-left5-1 { top: 680px; left: 280px; }
+        .row3-left5-2 { top: 680px; left: 255px; }
+        .row3-left5-3 { top: 700px; left: 241px; }
+        .row3-left5-4 { top: 720px; left: 232px; }
+        .row3-left5-5 { top: 740px; left: 241px; }
+        .row3-left5-6 { top: 760px; left: 255px; }
+        .row3-left5-7 { top: 780px; left: 280px; }
+        
+        .row3-left6-1 { top: 680px; left: 200px; }
+        .row3-left6-2 { top: 680px; left: 170px; }
+        .row3-left6-3 { top: 700px; left: 153px; }
+        .row3-left6-4 { top: 720px; left: 142px; }
+        .row3-left6-5 { top: 740px; left: 153px; }
+        .row3-left6-6 { top: 760px; left: 170px; }
+        .row3-left6-7 { top: 780px; left: 200px; }
+        
+        .row3-right1-1 { top: 680px; right: 600px; text-align: right; }
+        .row3-right1-2 { top: 680px; right: 595px; text-align: right; }
+        .row3-right1-3 { top: 700px; right: 593px; text-align: right; }
+        .row3-right1-4 { top: 720px; right: 592px; text-align: right; }
+        .row3-right1-5 { top: 740px; right: 593px; text-align: right; }
+        .row3-right1-6 { top: 760px; right: 595px; text-align: right; }
+        .row3-right1-7 { top: 780px; right: 600px; text-align: right; }
+        
+        .row3-right2-1 { top: 680px; right: 520px; text-align: right; }
+        .row3-right2-2 { top: 680px; right: 510px; text-align: right; }
+        .row3-right2-3 { top: 700px; right: 505px; text-align: right; }
+        .row3-right2-4 { top: 720px; right: 502px; text-align: right; }
+        .row3-right2-5 { top: 740px; right: 505px; text-align: right; }
+        .row3-right2-6 { top: 760px; right: 510px; text-align: right; }
+        .row3-right2-7 { top: 780px; right: 520px; text-align: right; }
+        
+        .row3-right3-1 { top: 680px; right: 440px; text-align: right; }
+        .row3-right3-2 { top: 680px; right: 425px; text-align: right; }
+        .row3-right3-3 { top: 700px; right: 417px; text-align: right; }
+        .row3-right3-4 { top: 720px; right: 412px; text-align: right; }
+        .row3-right3-5 { top: 740px; right: 417px; text-align: right; }
+        .row3-right3-6 { top: 760px; right: 425px; text-align: right; }
+        .row3-right3-7 { top: 780px; right: 440px; text-align: right; }
+        
+        .row3-right4-1 { top: 680px; right: 360px; text-align: right; }
+        .row3-right4-2 { top: 680px; right: 340px; text-align: right; }
+        .row3-right4-3 { top: 700px; right: 329px; text-align: right; }
+        .row3-right4-4 { top: 720px; right: 322px; text-align: right; }
+        .row3-right4-5 { top: 740px; right: 329px; text-align: right; }
+        .row3-right4-6 { top: 760px; right: 340px; text-align: right; }
+        .row3-right4-7 { top: 780px; right: 360px; text-align: right; }
+        
+        .row3-right5-1 { top: 680px; right: 280px; text-align: right; }
+        .row3-right5-2 { top: 680px; right: 255px; text-align: right; }
+        .row3-right5-3 { top: 700px; right: 241px; text-align: right; }
+        .row3-right5-4 { top: 720px; right: 232px; text-align: right; }
+        .row3-right5-5 { top: 740px; right: 241px; text-align: right; }
+        .row3-right5-6 { top: 760px; right: 255px; text-align: right; }
+        .row3-right5-7 { top: 780px; right: 280px; text-align: right; }
+        
+        .row3-right6-1 { top: 680px; right: 200px; text-align: right; }
+        .row3-right6-2 { top: 680px; right: 170px; text-align: right; }
+        .row3-right6-3 { top: 700px; right: 153px; text-align: right; }
+        .row3-right6-4 { top: 720px; right: 142px; text-align: right; }
+        .row3-right6-5 { top: 740px; right: 153px; text-align: right; }
+        .row3-right6-6 { top: 760px; right: 170px; text-align: right; }
+        .row3-right6-7 { top: 780px; right: 200px; text-align: right; }
+
+.navbar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar::after {
+    content: '';
+    position: fixed;
+    left: 240px;
+    top: 0;
+    width: 1px;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+}
+
+html, body {
+    padding-left: 0;
+}
+
+.navbar-bg {
+    width: 240px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: #1940F4;
+}
+
+.navbar-logo {
+    width: 150px;
+    height: 120px;
+    left: 20px;
+    top: 40px;
+    position: absolute;
+    transform: rotate(-18deg);
+    transform-origin: top left;
+}
+
+.navbar-logo-text {
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    line-height: 20px;
+    position: absolute;
+    left: 20px;
+    top: 35px;
+    width: 100px;
+}
+
+.navbar-section {
+    width: 120px;
+    left: 50px;
+    position: absolute;
+}
+
+.navbar-section-title {
+    color: white;
+    font-size: 12px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 8px;
+}
+
+@keyframes rotateEllipse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.navbar-logo svg {
+    animation: rotateEllipse 20s linear infinite;
+    transform-origin: center center;
+}
+
+.navbar-section-items {
+    color: white;
+    font-size: 12px;
+    font-family: IBM Plex Mono;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.navbar-section-items a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.navbar-section-items a:hover {
+    color: #FF9B5C;
+}
+
+.navbar-section-items a.active {
+    color: #FF9B5C;
+    font-weight: 700;
+}
+
+.navbar-divider {
+    width: 240px;
+    height: 0;
+    left: 0;
+    position: absolute;
+    border-top: 1px white solid;
+    
+}
+
+@media (max-height: 700px) {
+    .navbar {
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    html, body {
+        padding-left: 0;
+    }
+}
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-logo">
+        <div class="navbar-logo-text">The Orange</div>
+        <svg width="130" height="110" style="position: absolute; left: 0; top: 0;">
+            <defs>
+                <path id="ellipsePath" d="M 65,8 a 60,48 0 1,1 -1,0" fill="none"/>
+            </defs>
+            <text fill="white" font-size="8" font-family="IBM Plex Mono, monospace" font-weight="500">
+                <textPath href="#ellipsePath" startOffset="0%">
+                    A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE •
+                </textPath>
+            </text>
+        </svg>
+    </div>
+    <div class="navbar-divider" style="top: 160px;"></div>
+    <div class="navbar-section" style="top: 170px;">
+        <span class="navbar-section-title">Oranges</span>
+        <span class="navbar-section-items"><a href="v1.html">1.1 Space</a><br/><a href="v2.html">1.2 Peel</a><br/><a href="v3.html">1.3 Whole</a><br/><a href="v4.html">1.4 Slice</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 290px;"></div>
+    <div class="navbar-section" style="top: 300px;">
+        <span class="navbar-section-title">Sharing</span>
+        <span class="navbar-section-items"><a href="v5.html" class="active">2.1 Ripple</a><br/><a href="v6.html">2.2 Bag</a><br/><a href="v7.html">2.3 Warmth</a><br/><a href="v8.html">2.4 Peeling</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 420px;"></div>
+    <div class="navbar-section" style="top: 430px;">
+        <span class="navbar-section-title">Attention</span>
+        <span class="navbar-section-items"><a href="v9.html">3.1 Huge Orange</a><br/><a href="v10.html">3.2 Details</a><br/><a href="v11.html">3.3 Exist</a><br/><a href="v12.html">3.4 Stickers</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 550px;"></div>
+    <div class="navbar-section" style="top: 560px;">
+        <span class="navbar-section-title">Play</span>
+        <span class="navbar-section-items"><a href="v13.html">4.1 Search</a><br/><a href="v14.html">4.2 Connect</a><br/><a href="v15.html">4.3 Crossword</a><br/><a href="v16.html">4.4 Search</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 680px;"></div>
+    <div class="navbar-section" style="top: 690px;">
+        <span class="navbar-section-title">Flow</span>
+        <span class="navbar-section-items"><a href="v17.html">5.1 Day</a><br/><a href="v18.html">5.2 Direction</a><br/><a href="v19.html">5.3 Perspective</a><br/><a href="v20.html">5.4 Alphabet Soup</a></span>
+    </div>
+</div>
+    <div class="container">
+        <div class="content-wrapper">
+        <!-- Row 1 - First stanza - Left side ripples -->
+        <!-- Ripple 1 (innermost, full opacity) -->
+        <div class="line row1-left1-1 opacity-1">At lunchtime I bought</div>
+        <div class="line row1-left1-2 opacity-1">a huge orange—The size</div>
+        <div class="line row1-left1-3 opacity-1">of it made us all laugh.</div>
+        <div class="line row1-left1-4 opacity-1">I peeled it and shared it</div>
+        <div class="line row1-left1-5 opacity-1">with Robert and Dave—</div>
+        <div class="line row1-left1-6 opacity-1">They got quarters and</div>
+        <div class="line row1-left1-7 opacity-1">I had a half.</div>
+        
+        <!-- Ripple 2 -->
+        <div class="line row1-left2-1 opacity-2">At lunchtime I bought</div>
+        <div class="line row1-left2-2 opacity-2">a huge orange—The size</div>
+        <div class="line row1-left2-3 opacity-2">of it made us all laugh.</div>
+        <div class="line row1-left2-4 opacity-2">I peeled it and shared it</div>
+        <div class="line row1-left2-5 opacity-2">with Robert and Dave—</div>
+        <div class="line row1-left2-6 opacity-2">They got quarters and</div>
+        <div class="line row1-left2-7 opacity-2">I had a half.</div>
+        
+        <!-- Ripple 3 -->
+        <div class="line row1-left3-1 opacity-3">At lunchtime I bought</div>
+        <div class="line row1-left3-2 opacity-3">a huge orange—The size</div>
+        <div class="line row1-left3-3 opacity-3">of it made us all laugh.</div>
+        <div class="line row1-left3-4 opacity-3">I peeled it and shared it</div>
+        <div class="line row1-left3-5 opacity-3">with Robert and Dave—</div>
+        <div class="line row1-left3-6 opacity-3">They got quarters and</div>
+        <div class="line row1-left3-7 opacity-3">I had a half.</div>
+        
+        <!-- Ripple 4 -->
+        <div class="line row1-left4-1 opacity-4">At lunchtime I bought</div>
+        <div class="line row1-left4-2 opacity-4">a huge orange—The size</div>
+        <div class="line row1-left4-3 opacity-4">of it made us all laugh.</div>
+        <div class="line row1-left4-4 opacity-4">I peeled it and shared it</div>
+        <div class="line row1-left4-5 opacity-4">with Robert and Dave—</div>
+        <div class="line row1-left4-6 opacity-4">They got quarters and</div>
+        <div class="line row1-left4-7 opacity-4">I had a half.</div>
+        
+        <!-- Ripple 5 -->
+        <div class="line row1-left5-1 opacity-5">At lunchtime I bought</div>
+        <div class="line row1-left5-2 opacity-5">a huge orange—The size</div>
+        <div class="line row1-left5-3 opacity-5">of it made us all laugh.</div>
+        <div class="line row1-left5-4 opacity-5">I peeled it and shared it</div>
+        <div class="line row1-left5-5 opacity-5">with Robert and Dave—</div>
+        <div class="line row1-left5-6 opacity-5">They got quarters and</div>
+        <div class="line row1-left5-7 opacity-5">I had a half.</div>
+        
+        <!-- Ripple 6 (outermost, lowest opacity) -->
+        <div class="line row1-left6-1 opacity-6">At lunchtime I bought</div>
+        <div class="line row1-left6-2 opacity-6">a huge orange—The size</div>
+        <div class="line row1-left6-3 opacity-6">of it made us all laugh.</div>
+        <div class="line row1-left6-4 opacity-6">I peeled it and shared it</div>
+        <div class="line row1-left6-5 opacity-6">with Robert and Dave—</div>
+        <div class="line row1-left6-6 opacity-6">They got quarters and</div>
+        <div class="line row1-left6-7 opacity-6">I had a half.</div>
+        
+        <!-- Row 1 - First stanza - Right side ripples -->
+        <!-- Ripple 1 -->
+        <div class="line row1-right1-1 opacity-1">At lunchtime I bought</div>
+        <div class="line row1-right1-2 opacity-1">a huge orange—The size</div>
+        <div class="line row1-right1-3 opacity-1">of it made us all laugh.</div>
+        <div class="line row1-right1-4 opacity-1">I peeled it and shared it</div>
+        <div class="line row1-right1-5 opacity-1">with Robert and Dave—</div>
+        <div class="line row1-right1-6 opacity-1">They got quarters and</div>
+        <div class="line row1-right1-7 opacity-1">I had a half.</div>
+        
+        <!-- Ripple 2 -->
+        <div class="line row1-right2-1 opacity-2">At lunchtime I bought</div>
+        <div class="line row1-right2-2 opacity-2">a huge orange—The size</div>
+        <div class="line row1-right2-3 opacity-2">of it made us all laugh.</div>
+        <div class="line row1-right2-4 opacity-2">I peeled it and shared it</div>
+        <div class="line row1-right2-5 opacity-2">with Robert and Dave—</div>
+        <div class="line row1-right2-6 opacity-2">They got quarters and</div>
+        <div class="line row1-right2-7 opacity-2">I had a half.</div>
+        
+        <!-- Ripple 3 -->
+        <div class="line row1-right3-1 opacity-3">At lunchtime I bought</div>
+        <div class="line row1-right3-2 opacity-3">a huge orange—The size</div>
+        <div class="line row1-right3-3 opacity-3">of it made us all laugh.</div>
+        <div class="line row1-right3-4 opacity-3">I peeled it and shared it</div>
+        <div class="line row1-right3-5 opacity-3">with Robert and Dave—</div>
+        <div class="line row1-right3-6 opacity-3">They got quarters and</div>
+        <div class="line row1-right3-7 opacity-3">I had a half.</div>
+        
+        <!-- Ripple 4 -->
+        <div class="line row1-right4-1 opacity-4">At lunchtime I bought</div>
+        <div class="line row1-right4-2 opacity-4">a huge orange—The size</div>
+        <div class="line row1-right4-3 opacity-4">of it made us all laugh.</div>
+        <div class="line row1-right4-4 opacity-4">I peeled it and shared it</div>
+        <div class="line row1-right4-5 opacity-4">with Robert and Dave—</div>
+        <div class="line row1-right4-6 opacity-4">They got quarters and</div>
+        <div class="line row1-right4-7 opacity-4">I had a half.</div>
+        
+        <!-- Ripple 5 -->
+        <div class="line row1-right5-1 opacity-5">At lunchtime I bought</div>
+        <div class="line row1-right5-2 opacity-5">a huge orange—The size</div>
+        <div class="line row1-right5-3 opacity-5">of it made us all laugh.</div>
+        <div class="line row1-right5-4 opacity-5">I peeled it and shared it</div>
+        <div class="line row1-right5-5 opacity-5">with Robert and Dave—</div>
+        <div class="line row1-right5-6 opacity-5">They got quarters and</div>
+        <div class="line row1-right5-7 opacity-5">I had a half.</div>
+        
+        <!-- Ripple 6 -->
+        <div class="line row1-right6-1 opacity-6">At lunchtime I bought</div>
+        <div class="line row1-right6-2 opacity-6">a huge orange—The size</div>
+        <div class="line row1-right6-3 opacity-6">of it made us all laugh.</div>
+        <div class="line row1-right6-4 opacity-6">I peeled it and shared it</div>
+        <div class="line row1-right6-5 opacity-6">with Robert and Dave—</div>
+        <div class="line row1-right6-6 opacity-6">They got quarters and</div>
+        <div class="line row1-right6-7 opacity-6">I had a half.</div>
+        
+        <!-- Row 2 - Second stanza - Left side -->
+        <div class="line row2-left1-1 opacity-1">And that orange, it</div>
+        <div class="line row2-left1-2 opacity-1">made me so happy,</div>
+        <div class="line row2-left1-3 opacity-1">As ordinary things</div>
+        <div class="line row2-left1-4 opacity-1">often do Just lately.</div>
+        <div class="line row2-left1-5 opacity-1">The shopping. A walk</div>
+        <div class="line row2-left1-6 opacity-1">in the park. This is peace</div>
+        <div class="line row2-left1-7 opacity-1">and contentment. It's new.</div>
+        
+        <div class="line row2-left2-1 opacity-2">And that orange, it</div>
+        <div class="line row2-left2-2 opacity-2">made me so happy,</div>
+        <div class="line row2-left2-3 opacity-2">As ordinary things</div>
+        <div class="line row2-left2-4 opacity-2">often do Just lately.</div>
+        <div class="line row2-left2-5 opacity-2">The shopping. A walk</div>
+        <div class="line row2-left2-6 opacity-2">in the park. This is peace</div>
+        <div class="line row2-left2-7 opacity-2">and contentment. It's new.</div>
+        
+        <div class="line row2-left3-1 opacity-3">And that orange, it</div>
+        <div class="line row2-left3-2 opacity-3">made me so happy,</div>
+        <div class="line row2-left3-3 opacity-3">As ordinary things</div>
+        <div class="line row2-left3-4 opacity-3">often do Just lately.</div>
+        <div class="line row2-left3-5 opacity-3">The shopping. A walk</div>
+        <div class="line row2-left3-6 opacity-3">in the park. This is peace</div>
+        <div class="line row2-left3-7 opacity-3">and contentment. It's new.</div>
+        
+        <div class="line row2-left4-1 opacity-4">And that orange, it</div>
+        <div class="line row2-left4-2 opacity-4">made me so happy,</div>
+        <div class="line row2-left4-3 opacity-4">As ordinary things</div>
+        <div class="line row2-left4-4 opacity-4">often do Just lately.</div>
+        <div class="line row2-left4-5 opacity-4">The shopping. A walk</div>
+        <div class="line row2-left4-6 opacity-4">in the park. This is peace</div>
+        <div class="line row2-left4-7 opacity-4">and contentment. It's new.</div>
+        
+        <div class="line row2-left5-1 opacity-5">And that orange, it</div>
+        <div class="line row2-left5-2 opacity-5">made me so happy,</div>
+        <div class="line row2-left5-3 opacity-5">As ordinary things</div>
+        <div class="line row2-left5-4 opacity-5">often do Just lately.</div>
+        <div class="line row2-left5-5 opacity-5">The shopping. A walk</div>
+        <div class="line row2-left5-6 opacity-5">in the park. This is peace</div>
+        <div class="line row2-left5-7 opacity-5">and contentment. It's new.</div>
+        
+        <div class="line row2-left6-1 opacity-6">And that orange, it</div>
+        <div class="line row2-left6-2 opacity-6">made me so happy,</div>
+        <div class="line row2-left6-3 opacity-6">As ordinary things</div>
+        <div class="line row2-left6-4 opacity-6">often do Just lately.</div>
+        <div class="line row2-left6-5 opacity-6">The shopping. A walk</div>
+        <div class="line row2-left6-6 opacity-6">in the park. This is peace</div>
+        <div class="line row2-left6-7 opacity-6">and contentment. It's new.</div>
+        
+        <!-- Row 2 - Second stanza - Right side -->
+        <div class="line row2-right1-1 opacity-1">And that orange, it</div>
+        <div class="line row2-right1-2 opacity-1">made me so happy,</div>
+        <div class="line row2-right1-3 opacity-1">As ordinary things</div>
+        <div class="line row2-right1-4 opacity-1">often do Just lately.</div>
+        <div class="line row2-right1-5 opacity-1">The shopping. A walk</div>
+        <div class="line row2-right1-6 opacity-1">in the park. This is peace</div>
+        <div class="line row2-right1-7 opacity-1">and contentment. It's new.</div>
+        
+        <div class="line row2-right2-1 opacity-2">And that orange, it</div>
+        <div class="line row2-right2-2 opacity-2">made me so happy,</div>
+        <div class="line row2-right2-3 opacity-2">As ordinary things</div>
+        <div class="line row2-right2-4 opacity-2">often do Just lately.</div>
+        <div class="line row2-right2-5 opacity-2">The shopping. A walk</div>
+        <div class="line row2-right2-6 opacity-2">in the park. This is peace</div>
+        <div class="line row2-right2-7 opacity-2">and contentment. It's new.</div>
+        
+        <div class="line row2-right3-1 opacity-3">And that orange, it</div>
+        <div class="line row2-right3-2 opacity-3">made me so happy,</div>
+        <div class="line row2-right3-3 opacity-3">As ordinary things</div>
+        <div class="line row2-right3-4 opacity-3">often do Just lately.</div>
+        <div class="line row2-right3-5 opacity-3">The shopping. A walk</div>
+        <div class="line row2-right3-6 opacity-3">in the park. This is peace</div>
+        <div class="line row2-right3-7 opacity-3">and contentment. It's new.</div>
+        
+        <div class="line row2-right4-1 opacity-4">And that orange, it</div>
+        <div class="line row2-right4-2 opacity-4">made me so happy,</div>
+        <div class="line row2-right4-3 opacity-4">As ordinary things</div>
+        <div class="line row2-right4-4 opacity-4">often do Just lately.</div>
+        <div class="line row2-right4-5 opacity-4">The shopping. A walk</div>
+        <div class="line row2-right4-6 opacity-4">in the park. This is peace</div>
+        <div class="line row2-right4-7 opacity-4">and contentment. It's new.</div>
+        
+        <div class="line row2-right5-1 opacity-5">And that orange, it</div>
+        <div class="line row2-right5-2 opacity-5">made me so happy,</div>
+        <div class="line row2-right5-3 opacity-5">As ordinary things</div>
+        <div class="line row2-right5-4 opacity-5">often do Just lately.</div>
+        <div class="line row2-right5-5 opacity-5">The shopping. A walk</div>
+        <div class="line row2-right5-6 opacity-5">in the park. This is peace</div>
+        <div class="line row2-right5-7 opacity-5">and contentment. It's new.</div>
+        
+        <div class="line row2-right6-1 opacity-6">And that orange, it</div>
+        <div class="line row2-right6-2 opacity-6">made me so happy,</div>
+        <div class="line row2-right6-3 opacity-6">As ordinary things</div>
+        <div class="line row2-right6-4 opacity-6">often do Just lately.</div>
+        <div class="line row2-right6-5 opacity-6">The shopping. A walk</div>
+        <div class="line row2-right6-6 opacity-6">in the park. This is peace</div>
+        <div class="line row2-right6-7 opacity-6">and contentment. It's new.</div>
+        
+        <!-- Row 3 - Third stanza - Left side -->
+        <div class="line row3-left1-1 opacity-1">The rest of the day</div>
+        <div class="line row3-left1-2 opacity-1">was quite easy. I did</div>
+        <div class="line row3-left1-3 opacity-1">all the jobs on my list</div>
+        <div class="line row3-left1-4 opacity-1">And enjoyed them and</div>
+        <div class="line row3-left1-5 opacity-1">had some time over.</div>
+        <div class="line row3-left1-6 opacity-1">I love you. I'm glad</div>
+        <div class="line row3-left1-7 opacity-1">I exist.</div>
+        
+        <div class="line row3-left2-1 opacity-2">The rest of the day</div>
+        <div class="line row3-left2-2 opacity-2">was quite easy. I did</div>
+        <div class="line row3-left2-3 opacity-2">all the jobs on my list</div>
+        <div class="line row3-left2-4 opacity-2">And enjoyed them and</div>
+        <div class="line row3-left2-5 opacity-2">had some time over.</div>
+        <div class="line row3-left2-6 opacity-2">I love you. I'm glad</div>
+        <div class="line row3-left2-7 opacity-2">I exist.</div>
+        
+        <div class="line row3-left3-1 opacity-3">The rest of the day</div>
+        <div class="line row3-left3-2 opacity-3">was quite easy. I did</div>
+        <div class="line row3-left3-3 opacity-3">all the jobs on my list</div>
+        <div class="line row3-left3-4 opacity-3">And enjoyed them and</div>
+        <div class="line row3-left3-5 opacity-3">had some time over.</div>
+        <div class="line row3-left3-6 opacity-3">I love you. I'm glad</div>
+        <div class="line row3-left3-7 opacity-3">I exist.</div>
+        
+        <div class="line row3-left4-1 opacity-4">The rest of the day</div>
+        <div class="line row3-left4-2 opacity-4">was quite easy. I did</div>
+        <div class="line row3-left4-3 opacity-4">all the jobs on my list</div>
+        <div class="line row3-left4-4 opacity-4">And enjoyed them and</div>
+        <div class="line row3-left4-5 opacity-4">had some time over.</div>
+        <div class="line row3-left4-6 opacity-4">I love you. I'm glad</div>
+        <div class="line row3-left4-7 opacity-4">I exist.</div>
+        
+        <div class="line row3-left5-1 opacity-5">The rest of the day</div>
+        <div class="line row3-left5-2 opacity-5">was quite easy. I did</div>
+        <div class="line row3-left5-3 opacity-5">all the jobs on my list</div>
+        <div class="line row3-left5-4 opacity-5">And enjoyed them and</div>
+        <div class="line row3-left5-5 opacity-5">had some time over.</div>
+        <div class="line row3-left5-6 opacity-5">I love you. I'm glad</div>
+        <div class="line row3-left5-7 opacity-5">I exist.</div>
+        
+        <div class="line row3-left6-1 opacity-6">The rest of the day</div>
+        <div class="line row3-left6-2 opacity-6">was quite easy. I did</div>
+        <div class="line row3-left6-3 opacity-6">all the jobs on my list</div>
+        <div class="line row3-left6-4 opacity-6">And enjoyed them and</div>
+        <div class="line row3-left6-5 opacity-6">had some time over.</div>
+        <div class="line row3-left6-6 opacity-6">I love you. I'm glad</div>
+        <div class="line row3-left6-7 opacity-6">I exist.</div>
+        
+        <!-- Row 3 - Third stanza - Right side -->
+        <div class="line row3-right1-1 opacity-1">The rest of the day</div>
+        <div class="line row3-right1-2 opacity-1">was quite easy. I did</div>
+        <div class="line row3-right1-3 opacity-1">all the jobs on my list</div>
+        <div class="line row3-right1-4 opacity-1">And enjoyed them and</div>
+        <div class="line row3-right1-5 opacity-1">had some time over.</div>
+        <div class="line row3-right1-6 opacity-1">I love you. I'm glad</div>
+        <div class="line row3-right1-7 opacity-1">I exist.</div>
+        
+        <div class="line row3-right2-1 opacity-2">The rest of the day</div>
+        <div class="line row3-right2-2 opacity-2">was quite easy. I did</div>
+        <div class="line row3-right2-3 opacity-2">all the jobs on my list</div>
+        <div class="line row3-right2-4 opacity-2">And enjoyed them and</div>
+        <div class="line row3-right2-5 opacity-2">had some time over.</div>
+        <div class="line row3-right2-6 opacity-2">I love you. I'm glad</div>
+        <div class="line row3-right2-7 opacity-2">I exist.</div>
+        
+        <div class="line row3-right3-1 opacity-3">The rest of the day</div>
+        <div class="line row3-right3-2 opacity-3">was quite easy. I did</div>
+        <div class="line row3-right3-3 opacity-3">all the jobs on my list</div>
+        <div class="line row3-right3-4 opacity-3">And enjoyed them and</div>
+        <div class="line row3-right3-5 opacity-3">had some time over.</div>
+        <div class="line row3-right3-6 opacity-3">I love you. I'm glad</div>
+        <div class="line row3-right3-7 opacity-3">I exist.</div>
+        
+        <div class="line row3-right4-1 opacity-4">The rest of the day</div>
+        <div class="line row3-right4-2 opacity-4">was quite easy. I did</div>
+        <div class="line row3-right4-3 opacity-4">all the jobs on my list</div>
+        <div class="line row3-right4-4 opacity-4">And enjoyed them and</div>
+        <div class="line row3-right4-5 opacity-4">had some time over.</div>
+        <div class="line row3-right4-6 opacity-4">I love you. I'm glad</div>
+        <div class="line row3-right4-7 opacity-4">I exist.</div>
+        
+        <div class="line row3-right5-1 opacity-5">The rest of the day</div>
+        <div class="line row3-right5-2 opacity-5">was quite easy. I did</div>
+        <div class="line row3-right5-3 opacity-5">all the jobs on my list</div>
+        <div class="line row3-right5-4 opacity-5">And enjoyed them and</div>
+        <div class="line row3-right5-5 opacity-5">had some time over.</div>
+        <div class="line row3-right5-6 opacity-5">I love you. I'm glad</div>
+        <div class="line row3-right5-7 opacity-5">I exist.</div>
+        
+        <div class="line row3-right6-1 opacity-6">The rest of the day</div>
+        <div class="line row3-right6-2 opacity-6">was quite easy. I did</div>
+        <div class="line row3-right6-3 opacity-6">all the jobs on my list</div>
+        <div class="line row3-right6-4 opacity-6">And enjoyed them and</div>
+        <div class="line row3-right6-5 opacity-6">had some time over.</div>
+        <div class="line row3-right6-6 opacity-6">I love you. I'm glad</div>
+        <div class="line row3-right6-7 opacity-6">I exist.</div>
+        </div>
+    </div>
+    <script>
+        function scaleToFit() {
+            const wrapper = document.querySelector('.content-wrapper');
+            const navbarWidth = window.innerWidth <= 600 ? 0 : 240;
+            const availableWidth = window.innerWidth - navbarWidth;
+            const scaleX = availableWidth / 1440;
+            const scaleY = window.innerHeight / 1024;
+            const scale = Math.min(scaleX, scaleY);
+
+            // Center the scaled content
+            const scaledWidth = 1440 * scale;
+            const scaledHeight = 1024 * scale;
+            const offsetX = (availableWidth - scaledWidth) / 2;
+            const offsetY = (window.innerHeight - scaledHeight) / 2;
+
+            wrapper.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+        }
+        scaleToFit();
+        window.addEventListener('resize', scaleToFit);
+    </script>
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Orange - Radial Layout</title>
+    <style>
+        @font-face {
+            font-family: 'Cooper Md BT';
+            src: url('Cooper Md BT Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background: #1940F4;
+        }
+        .container {
+            width: calc(100% - 240px);
+            height: 100vh;
+            position: relative;
+            background: transparent;
+            overflow: hidden;
+            margin-left: 240px;
+        }
+        .content-wrapper {
+            width: 1440px;
+            height: 1024px;
+            position: absolute;
+            transform-origin: top left;
+            left: 0;
+            top: 0;
+        }
+        .poem-line {
+            position: absolute;
+            font-size: 12px;
+            font-family: 'Cooper Md BT', serif;
+            font-weight: 400;
+            color: white;
+            white-space: nowrap;
+            transform-origin: left center;
+        }
+        .highlight {
+            font-weight: 700;
+        }
+        .center-text {
+            position: absolute;
+            left: 597px;
+            top: 411px;
+            font-size: 12px;
+            font-family: 'Cooper Md BT', serif;
+            font-weight: 400;
+            color: white;
+            max-width: 350px;
+            line-height: 1.6;
+        }
+
+.navbar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar::after {
+    content: '';
+    position: fixed;
+    left: 240px;
+    top: 0;
+    width: 1px;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+}
+
+html, body {
+    padding-left: 0;
+}
+
+
+.navbar-bg {
+    width: 240px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: #1940F4;
+}
+
+.navbar-logo {
+    width: 150px;
+    height: 120px;
+    left: 20px;
+    top: 40px;
+    position: absolute;
+    transform: rotate(-18deg);
+    transform-origin: top left;
+}
+
+.navbar-logo-text {
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    line-height: 20px;
+    position: absolute;
+    left: 20px;
+    top: 35px;
+    width: 100px;
+}
+
+.navbar-section {
+    width: 120px;
+    left: 50px;
+    position: absolute;
+}
+
+.navbar-section-title {
+    color: white;
+    font-size: 12px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 8px;
+}
+
+@keyframes rotateEllipse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.navbar-logo svg {
+    animation: rotateEllipse 20s linear infinite;
+    transform-origin: center center;
+}
+
+.navbar-section-items {
+    color: white;
+    font-size: 12px;
+    font-family: IBM Plex Mono;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.navbar-section-items a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.navbar-section-items a:hover {
+    color: #FF9B5C;
+}
+
+.navbar-section-items a.active {
+    color: #FF9B5C;
+    font-weight: 700;
+}
+
+.navbar-divider {
+    width: 240px;
+    height: 0;
+    left: 0;
+    position: absolute;
+    border-top: 1px white solid;
+    
+}
+
+@media (max-height: 700px) {
+    .navbar {
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    html, body {
+        padding-left: 0;
+    }
+}
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-logo">
+        <div class="navbar-logo-text">The Orange</div>
+        <svg width="130" height="110" style="position: absolute; left: 0; top: 0;">
+            <defs>
+                <path id="ellipsePath" d="M 65,8 a 60,48 0 1,1 -1,0" fill="none"/>
+            </defs>
+            <text fill="white" font-size="8" font-family="IBM Plex Mono, monospace" font-weight="500">
+                <textPath href="#ellipsePath" startOffset="0%">
+                    A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE •
+                </textPath>
+            </text>
+        </svg>
+    </div>
+    <div class="navbar-divider" style="top: 160px;"></div>
+    <div class="navbar-section" style="top: 170px;">
+        <span class="navbar-section-title">Oranges</span>
+        <span class="navbar-section-items"><a href="v1.html">1.1 Space</a><br/><a href="v2.html">1.2 Peel</a><br/><a href="v3.html">1.3 Whole</a><br/><a href="v4.html">1.4 Slice</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 290px;"></div>
+    <div class="navbar-section" style="top: 300px;">
+        <span class="navbar-section-title">Sharing</span>
+        <span class="navbar-section-items"><a href="v5.html">2.1 Ripple</a><br/><a href="v6.html">2.2 Bag</a><br/><a href="v7.html" class="active">2.3 Warmth</a><br/><a href="v8.html">2.4 Peeling</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 420px;"></div>
+    <div class="navbar-section" style="top: 430px;">
+        <span class="navbar-section-title">Attention</span>
+        <span class="navbar-section-items"><a href="v9.html">3.1 Huge Orange</a><br/><a href="v10.html">3.2 Details</a><br/><a href="v11.html">3.3 Exist</a><br/><a href="v12.html">3.4 Stickers</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 550px;"></div>
+    <div class="navbar-section" style="top: 560px;">
+        <span class="navbar-section-title">Play</span>
+        <span class="navbar-section-items"><a href="v13.html">4.1 Search</a><br/><a href="v14.html">4.2 Connect</a><br/><a href="v15.html">4.3 Crossword</a><br/><a href="v16.html">4.4 Search</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 680px;"></div>
+    <div class="navbar-section" style="top: 690px;">
+        <span class="navbar-section-title">Flow</span>
+        <span class="navbar-section-items"><a href="v17.html">5.1 Day</a><br/><a href="v18.html">5.2 Direction</a><br/><a href="v19.html">5.3 Perspective</a><br/><a href="v20.html">5.4 Alphabet Soup</a></span>
+    </div>
+</div>
+    <div class="container">
+        <div class="content-wrapper">
+        <!-- Radial text lines - Ring 1 (outermost, most opaque) -->
+        <div class="poem-line" style="left: 731px; top: 366px; transform: rotate(-90deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 781px; top: 366px; transform: rotate(-63deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 821px; top: 395.06px; transform: rotate(-50deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 850px; top: 441.26px; transform: rotate(-30deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 865px; top: 468.27px; transform: rotate(-5deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 850px; top: 543px; transform: rotate(16deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 821px; top: 629px; transform: rotate(42deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 781px; top: 645px; transform: rotate(79deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 731px; top: 658px; transform: rotate(89deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 663.96px; top: 664.35px; transform: rotate(112deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 621.51px; top: 639px; transform: rotate(125deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 588.47px; top: 595.59px; transform: rotate(145deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 571.10px; top: 570.04px; transform: rotate(170deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 579.32px; top: 494.27px; transform: rotate(-169deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 600.48px; top: 406.01px; transform: rotate(-143deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 638.88px; top: 386.48px; transform: rotate(-106deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+        <div class="poem-line" style="left: 687.50px; top: 369.03px; transform: rotate(-97deg); opacity: 1.0;">
+            At lunchtime I bought a huge <span class="highlight">orange</span>—   The size of it made us all laugh.   I peeled it and shared it with Robert and Dave—
+        </div>
+
+        <!-- Radial text lines - Ring 2 (60% opacity) -->
+        <div class="poem-line" style="left: 714.91px; top: 365.67px; transform: rotate(-96deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 764.61px; top: 360.17px; transform: rotate(-69deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 807.56px; top: 384.67px; transform: rotate(-56deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 841.45px; top: 427.41px; transform: rotate(-36deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 859.33px; top: 452.60px; transform: rotate(-11deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 852.62px; top: 528.53px; transform: rotate(10deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 833.24px; top: 617.19px; transform: rotate(36deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 795.24px; top: 637.49px; transform: rotate(73deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 746.97px; top: 655.90px; transform: rotate(82deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 681.02px; top: 669.57px; transform: rotate(105deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 636.05px; top: 649.03px; transform: rotate(118deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 598.45px; top: 609.51px; transform: rotate(139deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 578.38px; top: 586.03px; transform: rotate(163deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 578.23px; top: 509.80px; transform: rotate(-175deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 589.57px; top: 419.76px; transform: rotate(-149deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 625.59px; top: 396.13px; transform: rotate(-112deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+        <div class="poem-line" style="left: 672.01px; top: 373.45px; transform: rotate(-103deg); opacity: 0.6;">
+            They got quarters and I had a half.   And that <span class="highlight">orange</span>, it made me so happy,   As ordinary things often do
+        </div>
+
+        <!-- Radial text lines - Ring 3 (40% opacity) -->
+        <div class="poem-line" style="left: 698.51px; top: 366.74px; transform: rotate(-103deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 747.29px; top: 355.75px; transform: rotate(-76deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 792.70px; top: 375.31px; transform: rotate(-63deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 831.14px; top: 414.01px; transform: rotate(-42deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 851.71px; top: 437.06px; transform: rotate(-18deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 853.50px; top: 513.26px; transform: rotate(4deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 844.11px; top: 603.53px; transform: rotate(29deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 808.60px; top: 627.93px; transform: rotate(67deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 762.68px; top: 651.60px; transform: rotate(76deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 698.67px; top: 672.52px; transform: rotate(99deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 651.68px; top: 657.12px; transform: rotate(112deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 609.92px; top: 622.03px; transform: rotate(132deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 587.36px; top: 600.93px; transform: rotate(157deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 578.73px; top: 525.19px; transform: rotate(179deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 579.97px; top: 434.44px; transform: rotate(-156deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 613.14px; top: 406.95px; transform: rotate(-119deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+        <div class="poem-line" style="left: 656.75px; top: 379.25px; transform: rotate(-109deg); opacity: 0.4;">
+            Just lately. The shopping. A walk in the park.   This is peace and contentment. It's new.   The rest of the day was quite easy.
+        </div>
+
+        <!-- Radial text lines - Ring 4 (20% opacity, innermost) -->
+        <div class="poem-line" style="left: 679.57px; top: 370.16px; transform: rotate(-110deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 726.55px; top: 353.06px; transform: rotate(-83deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 774.08px; top: 366.69px; transform: rotate(-70deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 817.13px; top: 400.19px; transform: rotate(-50deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 840.46px; top: 420.44px; transform: rotate(-25deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 851.92px; top: 495.79px; transform: rotate(-4deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 854.08px; top: 586.53px; transform: rotate(22deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 821.96px; top: 615.24px; transform: rotate(59deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 779.42px; top: 644.55px; transform: rotate(69deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 718.58px; top: 673.44px; transform: rotate(92deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 670.03px; top: 664.14px; transform: rotate(105deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 624.14px; top: 634.64px; transform: rotate(125deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 599.08px; top: 616.58px; transform: rotate(150deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 580.90px; top: 542.55px; transform: rotate(171deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 570.59px; top: 452.38px; transform: rotate(-163deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 600px; top: 420.90px; transform: rotate(-126deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        <div class="poem-line" style="left: 639.73px; top: 387.88px; transform: rotate(-117deg); opacity: 0.2;">
+            I did all the jobs on my list   And enjoyed them and had some time over.   I love you. I'm glad I exist.
+        </div>
+        </div>
+    </div>
+    <script>
+        function scaleToFit() {
+            const wrapper = document.querySelector('.content-wrapper');
+            const navbarWidth = window.innerWidth <= 600 ? 0 : 240;
+            const availableWidth = window.innerWidth - navbarWidth;
+            const scaleX = availableWidth / 1440;
+            const scaleY = window.innerHeight / 1024;
+            const scale = Math.min(scaleX, scaleY);
+
+            // Center the scaled content
+            const scaledWidth = 1440 * scale;
+            const scaledHeight = 1024 * scale;
+            const offsetX = (availableWidth - scaledWidth) / 2;
+            const offsetY = (window.innerHeight - scaledHeight) / 2;
+
+            wrapper.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+        }
+        scaleToFit();
+        window.addEventListener('resize', scaleToFit);
+    </script>
+</body>
+</html>

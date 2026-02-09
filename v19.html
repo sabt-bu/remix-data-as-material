@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orange Poem</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      background: #1940F4;
+    }
+    .container {
+      width: 1440px;
+      height: 1024px;
+      position: relative;
+      background: transparent;
+      overflow: hidden;
+      transform-origin: top left;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+    .poem {
+      font-size: 48px;
+      font-family: 'Cooper Md BT', serif;
+      font-weight: 400;
+      word-wrap: break-word;
+      line-height: 1.5;
+    }
+
+    .gray {
+      color: white;
+      animation: fadeOut 5s ease-out forwards;
+    }
+
+    .black {
+      color: white;
+    }
+
+    @keyframes fadeOut {
+      0% {
+        color: white;
+      }
+      100% {
+        color: transparent;
+      }
+    }
+
+.navbar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar::after {
+    content: '';
+    position: fixed;
+    left: 240px;
+    top: 0;
+    width: 1px;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+}
+
+html, body {
+    padding-left: 240px;
+}
+
+
+.navbar-bg {
+    width: 240px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: #1940F4;
+}
+
+.navbar-logo {
+    width: 150px;
+    height: 120px;
+    left: 20px;
+    top: 40px;
+    position: absolute;
+    transform: rotate(-18deg);
+    transform-origin: top left;
+}
+
+.navbar-logo-text {
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    line-height: 20px;
+    position: absolute;
+    left: 20px;
+    top: 35px;
+    width: 100px;
+}
+
+.navbar-section {
+    width: 120px;
+    left: 50px;
+    position: absolute;
+}
+
+.navbar-section-title {
+    color: white;
+    font-size: 16px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 8px;
+}
+
+@keyframes rotateEllipse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.navbar-logo svg {
+    animation: rotateEllipse 20s linear infinite;
+    transform-origin: center center;
+}
+
+.navbar-section-items a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.navbar-section-items a:hover {
+    color: #FF9B5C;
+}
+
+.navbar-section-items a.active {
+    color: #FF9B5C;
+    font-weight: 700;
+}
+
+.navbar-section-items {
+    color: white;
+    font-size: 12px;
+    font-family: IBM Plex Mono;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.navbar-divider {
+    width: 240px;
+    height: 0;
+    left: 0;
+    position: absolute;
+    border-top: 1px white solid;
+    
+}
+
+@media (max-height: 700px) {
+    .navbar {
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    html, body {
+        padding-left: 0;
+    }
+}
+  </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-logo">
+        <div class="navbar-logo-text">The Orange</div>
+        <svg width="130" height="110" style="position: absolute; left: 0; top: 0;">
+            <defs>
+                <path id="ellipsePath" d="M 65,8 a 60,48 0 1,1 -1,0" fill="none"/>
+            </defs>
+            <text fill="white" font-size="8" font-family="IBM Plex Mono, monospace" font-weight="500">
+                <textPath href="#ellipsePath" startOffset="0%">
+                    A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE •
+                </textPath>
+            </text>
+        </svg>
+    </div>
+    <div class="navbar-divider" style="top: 160px;"></div>
+    <div class="navbar-section" style="top: 170px;">
+        <span class="navbar-section-title">Oranges</span>
+        <span class="navbar-section-items"><a href="v1.html">1.1 Space</a><br/><a href="v2.html">1.2 Peel</a><br/><a href="v3.html">1.3 Whole</a><br/><a href="v4.html">1.4 Slice</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 290px;"></div>
+    <div class="navbar-section" style="top: 300px;">
+        <span class="navbar-section-title">Sharing</span>
+        <span class="navbar-section-items"><a href="v5.html">2.1 Ripple</a><br/><a href="v6.html">2.2 Bag</a><br/><a href="v7.html">2.3 Warmth</a><br/><a href="v8.html">2.4 Peeling</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 420px;"></div>
+    <div class="navbar-section" style="top: 430px;">
+        <span class="navbar-section-title">Attention</span>
+        <span class="navbar-section-items"><a href="v9.html">3.1 Huge Orange</a><br/><a href="v10.html">3.2 Details</a><br/><a href="v11.html">3.3 Exist</a><br/><a href="v12.html">3.4 Stickers</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 550px;"></div>
+    <div class="navbar-section" style="top: 560px;">
+        <span class="navbar-section-title">Play</span>
+        <span class="navbar-section-items"><a href="v13.html">4.1 Search</a><br/><a href="v14.html">4.2 Connect</a><br/><a href="v15.html">4.3 Crossword</a><br/><a href="v16.html">4.4 Search</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 680px;"></div>
+    <div class="navbar-section" style="top: 690px;">
+        <span class="navbar-section-title">Flow</span>
+        <span class="navbar-section-items"><a href="v17.html">5.1 Day</a><br/><a href="v18.html">5.2 Direction</a><br/><a href="v19.html" class="active">5.3 Perspective</a><br/><a href="v20.html">5.4 Alphabet Soup</a></span>
+    </div>
+</div>
+  <div class="container">
+  <div class="poem">
+    <span class="gray">At lunchtime I bought a huge orange— The size of it made us all</span><span class="black"> laugh. </span><span class="gray">I peeled it and </span><span class="black">shared </span><span class="gray">it with Robert and Dave— They got quarters and I had a half.</span><br/><br/>
+    <span class="gray">And that orange, it made me so </span><span class="black">happy, </span><span class="gray">As ordinary things often do </span><span class="gray">Just lately. The shopping. A walk in the park. </span><span class="gray">This is </span><span class="black">peace</span><span class="gray"> and </span><span class="black">contentment</span><span class="gray">. It's new.</span><br/><br/>
+    <span class="gray">The rest of the day was quite </span><span class="black">easy. </span><span class="gray">I did all the jobs on my list </span><span class="gray">And </span><span class="black">enjoyed</span><span class="gray"> them and had some </span><span class="black">time</span><span class="gray"> over. </span><span class="black">I love you. I'm glad I exist.</span>
+  </div>
+  </div>
+
+  <script>
+    function scaleToFit() {
+      const container = document.querySelector('.container');
+      const navbarWidth = window.innerWidth <= 600 ? 0 : 240;
+      const availableWidth = window.innerWidth - navbarWidth;
+      const scaleX = availableWidth / 1440;
+      const scaleY = window.innerHeight / 1024;
+      const scale = Math.min(scaleX, scaleY);
+
+      // Center horizontally in available space
+      const scaledWidth = 1440 * scale;
+      const offsetX = (availableWidth - scaledWidth) / 2;
+
+      // Center vertically
+      const scaledHeight = 1024 * scale;
+      const offsetY = (window.innerHeight - scaledHeight) / 2;
+
+      container.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+    }
+    scaleToFit();
+    window.addEventListener('resize', scaleToFit);
+
+    function resetAnimation() {
+      const graySpans = document.querySelectorAll('.gray');
+      graySpans.forEach(span => {
+        span.style.animation = 'none';
+        span.offsetHeight; // Trigger reflow
+        span.style.animation = '';
+      });
+    }
+
+    // Reset every 20 seconds
+    setInterval(resetAnimation, 20000);
+  </script>
+</body>
+</html>

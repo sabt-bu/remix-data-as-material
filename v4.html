@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circular Text Grid</title>
+    <style>
+        @font-face {
+            font-family: 'Cooper Md BT';
+            src: url('Cooper Md BT Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background: #1940F4;
+        }
+
+        .container {
+            width: calc(100% - 240px);
+            height: 100vh;
+            position: relative;
+            background: transparent;
+            overflow: hidden;
+            margin-left: 240px;
+        }
+        .content-wrapper {
+            width: 1440px;
+            height: 1024px;
+            position: absolute;
+            transform-origin: top left;
+        }
+
+        .slices-container {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .slice {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            left: 50%;
+            top: 50%;
+            transform-origin: center center;
+        }
+
+        /* Tip at center, same wedge each slice, rotate to radiate outward (12 o'clock = 0deg) */
+        .slice-1  { transform: translate(-50%, -50%) rotate(0deg); }
+        .slice-2  { transform: translate(-50%, -50%) rotate(30deg); }
+        .slice-3  { transform: translate(-50%, -50%) rotate(60deg); }
+        .slice-4  { transform: translate(-50%, -50%) rotate(90deg); }
+        .slice-5  { transform: translate(-50%, -50%) rotate(120deg); }
+        .slice-6  { transform: translate(-50%, -50%) rotate(150deg); }
+        .slice-7  { transform: translate(-50%, -50%) rotate(180deg); }
+        .slice-8  { transform: translate(-50%, -50%) rotate(210deg); }
+        .slice-9  { transform: translate(-50%, -50%) rotate(240deg); }
+        .slice-10 { transform: translate(-50%, -50%) rotate(270deg); }
+        .slice-11 { transform: translate(-50%, -50%) rotate(300deg); }
+        .slice-12 { transform: translate(-50%, -50%) rotate(330deg); }
+
+        text {
+            font-family: 'Cooper Md BT', serif;
+            fill: white;
+            font-weight: 400;
+        }
+
+        .decorative-text {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .happy-decoration {
+            left: 50%;
+            top: 50%;
+            transform: translate(-320px, 80px);
+        }
+
+        .justlately-decoration {
+            left: 50%;
+            top: 50%;
+            transform: translate(80px, 180px);
+        }
+
+        .itsnew-decoration {
+            left: 50%;
+            top: 50%;
+            transform: translate(200px, 100px);
+        }
+
+        .navbar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar::after {
+    content: '';
+    position: fixed;
+    left: 240px;
+    top: 0;
+    width: 1px;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+}
+
+html, body {
+    padding-left: 0;
+}
+
+
+.navbar-bg {
+    width: 240px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: #1940F4;
+}
+
+.navbar-logo {
+    width: 220px;
+    height: 170px;
+    left: 35px;
+    top: 40px;
+    position: absolute;
+    transform: rotate(-18deg);
+    transform-origin: top left;
+}
+
+.navbar-logo-text {
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    line-height: 20px;
+    position: absolute;
+    left: 20px;
+    top: 35px;
+    width: 100px;
+}
+
+.navbar-section {
+    width: 120px;
+    left: 50px;
+    position: absolute;
+}
+
+.navbar-section-title {
+    color: white;
+    font-size: 20px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 4px;
+}
+
+@keyframes rotateEllipse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.navbar-logo svg {
+    animation: rotateEllipse 20s linear infinite;
+    transform-origin: center center;
+}
+
+.navbar-section-items {
+    color: white;
+    font-size: 12px;
+    font-family: IBM Plex Mono;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+.navbar-section-items a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.navbar-section-items a:hover {
+    color: #FF9B5C;
+}
+
+.navbar-section-items a.active {
+    color: #FF9B5C;
+    font-weight: 700;
+}
+
+.navbar-divider {
+    width: 240px;
+    height: 0;
+    left: 0;
+    position: absolute;
+    border-top: 1px white solid;
+    
+}
+
+@media (max-height: 700px) {
+    .navbar {
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    html, body {
+        padding-left: 0;
+    }
+}
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-logo">
+        <div class="navbar-logo-text">The Orange</div>
+        <svg width="130" height="110" style="position: absolute; left: 0; top: 0;">
+            <defs>
+                <path id="ellipsePath" d="M 65,8 a 60,48 0 1,1 -1,0" fill="none"/>
+            </defs>
+            <text fill="white" font-size="8" font-family="IBM Plex Mono, monospace" font-weight="500">
+                <textPath href="#ellipsePath" startOffset="0%">
+                    A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE •
+                </textPath>
+            </text>
+        </svg>
+    </div>
+    <div class="navbar-divider" style="top: 160px;"></div>
+    <div class="navbar-section" style="top: 170px;">
+        <span class="navbar-section-title">Oranges</span>
+        <span class="navbar-section-items"><a href="v1.html">1.1 Space</a><br/><a href="v2.html">1.2 Peel</a><br/><a href="v3.html">1.3 Whole</a><br/><a href="v4.html" class="active">1.4 Slice</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 290px;"></div>
+    <div class="navbar-section" style="top: 300px;">
+        <span class="navbar-section-title">Sharing</span>
+        <span class="navbar-section-items"><a href="v5.html">2.1 Ripple</a><br/><a href="v6.html">2.2 Bag</a><br/><a href="v7.html">2.3 Warmth</a><br/><a href="v8.html">2.4 Peeling</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 420px;"></div>
+    <div class="navbar-section" style="top: 430px;">
+        <span class="navbar-section-title">Attention</span>
+        <span class="navbar-section-items"><a href="v9.html">3.1 Huge Orange</a><br/><a href="v10.html">3.2 Details</a><br/><a href="v11.html">3.3 Exist</a><br/><a href="v12.html">3.4 Stickers</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 550px;"></div>
+    <div class="navbar-section" style="top: 560px;">
+        <span class="navbar-section-title">Play</span>
+        <span class="navbar-section-items"><a href="v13.html">4.1 Search</a><br/><a href="v14.html">4.2 Connect</a><br/><a href="v15.html">4.3 Crossword</a><br/><a href="v16.html">4.4 Search</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 680px;"></div>
+    <div class="navbar-section" style="top: 690px;">
+        <span class="navbar-section-title">Flow</span>
+        <span class="navbar-section-items"><a href="v17.html">5.1 Day</a><br/><a href="v18.html">5.2 Direction</a><br/><a href="v19.html">5.3 Perspective</a><br/><a href="v20.html">5.4 Alphabet Soup</a></span>
+    </div>
+</div>
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="slices-container">
+            <!-- Slice 1: At lunchtime I bought a huge orange -->
+            <svg class="slice slice-1" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="-400 -400 800 800" fill="none">
+                <defs>
+                    <clipPath id="sliceClip1">
+                        <path d="M 0 0 L -96.76 -388.12 A 400 400 0 0 1 96.76 -388.12 Z"/>
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#sliceClip1)">
+                    <text fill="white" font-size="8" font-family="Cooper Md BT, serif" font-weight="400">
+                        <tspan x="-200" y="-380">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-370">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-360">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-350">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-340">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-330">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-320">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-310">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-300">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-290">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-280">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-270">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-260">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-250">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-240">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-230">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-220">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-210">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-200">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-190">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-180">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-170">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-160">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-150">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-140">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-130">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-120">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-110">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-100">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-90">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-80">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-70">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-60">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-50">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-40">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-30">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-20">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                        <tspan x="-200" y="-10">At lunchtime I bought a huge orange At lunchtime I bought a huge orange At lunchtime I bought a huge orange</tspan>
+                    </text>
+                </g>
+            </svg>
+
+            <!-- Slice 2: The size of it made us all laugh -->
+            <svg class="slice slice-2" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="-400 -400 800 800" fill="none">
+                <defs>
+                    <clipPath id="sliceClip2">
+                        <path d="M 0 0 L -96.76 -388.12 A 400 400 0 0 1 96.76 -388.12 Z"/>
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#sliceClip2)" >
+                    <text fill="white" font-size="8" font-family="Cooper Md BT, serif" font-weight="400">
+                        <tspan x="-200" y="-380">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-370">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-360">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-350">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-340">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-330">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-320">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-310">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-300">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-290">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-280">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-270">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-260">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-250">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-240">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-230">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-220">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-210">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-200">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-190">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-180">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-170">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-160">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-150">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-140">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-130">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-120">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-110">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-100">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-90">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-80">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-70">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-60">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-50">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-40">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-30">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-20">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                        <tspan x="-200" y="-10">The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh The size of it made us all laugh</tspan>
+                    </text>
+                </g>
+            </svg>
+
+            <!-- Slice 3: I peeled it and shared it with Robert and Dave -->
+            <svg class="slice slice-3" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="-400 -400 800 800" fill="none">
+                <defs>
+                    <clipPath id="sliceClip3">
+                        <path d="M 0 0 L -96.76 -388.12 A 400 400 0 0 1 96.76 -388.12 Z"/>
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#sliceClip3)" >
+                    <text fill="white" font-size="8" font-family="Cooper Md BT, serif" font-weight="400">
+                        <tspan x="-200" y="-380">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-370">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-360">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-350">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-340">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-330">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-320">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-310">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-300">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-290">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-280">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-270">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-260">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-250">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-240">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-230">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-220">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-210">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-200">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-190">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-180">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-170">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-160">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-150">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-140">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-130">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-120">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-110">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-100">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-90">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-80">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-70">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-60">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-50">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-40">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-30">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-20">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                        <tspan x="-200" y="-10">I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave I peeled it and shared it with Robert and Dave</tspan>
+                    </text>
+                </g>
+            </svg>
+
+            <!-- Slice 4: They got quarters and I had a half -->
+            <svg class="slice slice-4" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="-400 -400 800 800" fill="none">
+                <defs>
+                    <clipPath id="sliceClip4">
+                        <path d="M 0 0 L -96.76 -388.12 A 400 400 0 0 1 96.76 -388.12 Z"/>
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#sliceClip4)" >
+                    <text fill="white" font-size="8" font-family="Cooper Md BT, serif" font-weight="400">
+                        <tspan x="-200" y="-380">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-370">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-360">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-350">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-340">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-330">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-320">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-310">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-300">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-290">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-280">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-270">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-260">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-250">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-240">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-230">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-220">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-210">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-200">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-190">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-180">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-170">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-160">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-150">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-140">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-130">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-120">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-110">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-100">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-90">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-80">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-70">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-60">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-50">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-40">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-30">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-20">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                        <tspan x="-200" y="-10">They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half They got quarters and I had a half</tspan>
+                    </text>
+                </g>
+            </svg>
+
+            <!-- Slice 5: And that orange it made me so happy -->
+            <svg class="slice slice-5" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="-400 -400 800 800" fill="none">
+                <defs>
+                    <clipPath id="sliceClip5">
+                        <path d="M 0 0 L -96.76 -388.12 A 400 400 0 0 1 96.76 -388.12 Z"/>
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#sliceClip5)" >
+                    <text fill="white" font-size="8" font-family="Cooper Md BT, serif" font-weight="400">
+                        <tspan x="-200" y="-380">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-370">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-360">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-350">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-340">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-330">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-320">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-310">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-300">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-290">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-280">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-270">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-260">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-250">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-240">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-230">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-220">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-210">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-200">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-190">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-180">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-170">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-160">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-150">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-140">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-130">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-120">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-110">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-100">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-90">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-80">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-70">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-60">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-50">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-40">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-30">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-20">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                        <tspan x="-200" y="-10">And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy And that orange it made me so happy</tspan>
+                    </text>
+                </g>
+            </svg>
+
+            <!-- Slice 6: As ordinary things often do -->
+            <svg class="slice slice-6" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="-400 -400 800 800" fill="none">
+                <defs>
+                    <clipPath id="sliceClip6">
+                        <path d="M 0 0 L -96.76 -388.12 A 400 400 0 0 1 96.76 -388.12 Z"/>
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#sliceClip6)" >
+                    <text fill="white" font-size="8" font-family="Cooper Md BT, serif" font-weight="400">
+                        <tspan x="-200" y="-380">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-370">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-360">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-350">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-340">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-330">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-320">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-310">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-300">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-290">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-280">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-270">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-260">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-250">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-240">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-230">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-220">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-210">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-200">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-190">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-180">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-170">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-160">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-150">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-140">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-130">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-120">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-110">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-100">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-90">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-80">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-70">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-60">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-50">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-40">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-30">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-20">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                        <tspan x="-200" y="-10">As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do As ordinary things often do</tspan>
+                    </text>
+                </g>
+            </svg>
+
+            <!-- Slice 7: Just lately The shopping A walk in the park -->
+            <svg class="slice slice-7" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="-400 -400 800 800" fill="none">
+                <defs>
+                    <clipPath id="sliceClip7">
+                        <path d="M 0 0 L -96.76 -388.12 A 400 400 0 0 1 96.76 -388.12 Z"/>
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#sliceClip7)" >
+                    <text fill="white" font-size="8" font-family="Cooper Md BT, serif" font-weight="400">
+                        <tspan x="-200" y="-380">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-370">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-360">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-350">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-340">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-330">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-320">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-310">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-300">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-290">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-280">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-270">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-260">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-250">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-240">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-230">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-220">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-210">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-200">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-190">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-180">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-170">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-160">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-150">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-140">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-130">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-120">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-110">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-100">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-90">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-80">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-70">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-60">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-50">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-40">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-30">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-20">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                        <tspan x="-200" y="-10">Just lately The shopping A walk in the park Just lately The shopping A walk in the park Just lately The shopping A walk in the park</tspan>
+                    </text>
+                </g>
+            </svg>
+
+            <!-- Slice 8: This is peace and contentment Its new -->
+            <svg class="slice slice-8" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="-400 -400 800 800" fill="none">
+                <defs>
+                    <clipPath id="sliceClip8">
+                        <path d="M 0 0 L -96.76 -388.12 A 400 400 0 0 1 96.76 -388.12 Z"/>
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#sliceClip8)" >
+                    <text fill="white" font-size="8" font-family="Cooper Md BT, serif" font-weight="400">
+                        <tspan x="-200" y="-380">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-370">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-360">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-350">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-340">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-330">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-320">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-310">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-300">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-290">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-280">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-270">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-260">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-250">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-240">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-230">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-220">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-210">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-200">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-190">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-180">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-170">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-160">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-150">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-140">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-130">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-120">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-110">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-100">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-90">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-80">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-70">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-60">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-50">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-40">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-30">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-20">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="-10">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="0">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="10">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="20">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                        <tspan x="-200" y="30">This is peace and contentment Its new This is peace and contentment Its new This is peace and contentment Its new</tspan>
+                    </text>
+                </g>
+            </svg>
+
+            <!-- Slice 9: The rest of the day was quite easy -->
+            <svg class="slice slice-9" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="-400 -400 800 800" fill="none">
+                <defs>
+                    <clipPath id="sliceClip9">
+                        <path d="M 0 0 L -96.76 -388.12 A 400 400 0 0 1 96.76 -388.12 Z"/>
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#sliceClip9)" >
+                    <text fill="white" font-size="8" font-family="Cooper Md BT, serif" font-weight="400">
+                        <tspan x="-200" y="-380">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-370">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-360">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-350">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-340">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-330">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-320">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-310">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-300">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-290">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-280">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-270">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-260">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-250">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-240">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-230">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-220">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-210">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-200">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-190">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-180">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-170">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-160">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-150">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-140">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-130">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-120">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-110">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-100">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-90">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-80">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-70">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-60">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-50">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-40">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-30">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-20">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="-10">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="0">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                        <tspan x="-200" y="10">The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy The rest of the day was quite easy</tspan>
+                    </text>
+                </g>
+            </svg>
+
+            <!-- Slice 10: I did all the jobs on my list -->
+            <svg class="slice slice-10" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="-400 -400 800 800" fill="none">
+                <defs>
+                    <clipPath id="sliceClip10">
+                        <path d="M 0 0 L -96.76 -388.12 A 400 400 0 0 1 96.76 -388.12 Z"/>
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#sliceClip10)" >
+                    <text fill="white" font-size="8" font-family="Cooper Md BT, serif" font-weight="400">
+                        <tspan x="-200" y="-380">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-370">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-360">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-350">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-340">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-330">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-320">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-310">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-300">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-290">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-280">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-270">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-260">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-250">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-240">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-230">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-220">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-210">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-200">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-190">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-180">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-170">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-160">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-150">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-140">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-130">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-120">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-110">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-100">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-90">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-80">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-70">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-60">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-50">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-40">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-30">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                        <tspan x="-200" y="-20">I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list I did all the jobs on my list</tspan>
+                    </text>
+                </g>
+            </svg>
+
+            <!-- Slice 11: And enjoyed them and had some time over -->
+            <svg class="slice slice-11" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="-400 -400 800 800" fill="none">
+                <defs>
+                    <clipPath id="sliceClip11">
+                        <path d="M 0 0 L -96.76 -388.12 A 400 400 0 0 1 96.76 -388.12 Z"/>
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#sliceClip11)" >
+                    <text fill="white" font-size="8" font-family="Cooper Md BT, serif" font-weight="400">
+                        <tspan x="-200" y="-380">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-370">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-360">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-350">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-340">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-330">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-320">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-310">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-300">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-290">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-280">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-270">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-260">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-250">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-240">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-230">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-220">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-210">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-200">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-190">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-180">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-170">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-160">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-150">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-140">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-130">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-120">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-110">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-100">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-90">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-80">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-70">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-60">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-50">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-40">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-30">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-20">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                        <tspan x="-200" y="-10">And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over And enjoyed them and had some time over</tspan>
+                    </text>
+                </g>
+            </svg>
+
+            <!-- Slice 12: I love you Im glad I exist -->
+            <svg class="slice slice-12" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="-400 -400 800 800" fill="none">
+                <defs>
+                    <clipPath id="sliceClip12">
+                        <path d="M 0 0 L -96.76 -388.12 A 400 400 0 0 1 96.76 -388.12 Z"/>
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#sliceClip12)" >
+                    <text fill="white" font-size="8" font-family="Cooper Md BT, serif" font-weight="400">
+                        <tspan x="-200" y="-380">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-370">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-360">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-350">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-340">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-330">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-320">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-310">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-300">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-290">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-280">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-270">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-260">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-250">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-240">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-230">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-220">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-210">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-200">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-190">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-180">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-170">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-160">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-150">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-140">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-130">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-120">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-110">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-100">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-90">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-80">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-70">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-60">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-50">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-40">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-30">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-20">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                        <tspan x="-200" y="-10">I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist I love you Im glad I exist</tspan>
+                    </text>
+                </g>
+            </svg>
+            </div>
+        </div>
+    </div>
+    <script>
+        function scaleToFit() {
+            const wrapper = document.querySelector('.content-wrapper');
+            const navbarWidth = window.innerWidth <= 600 ? 0 : 240;
+            const availableWidth = window.innerWidth - navbarWidth;
+            const scaleX = availableWidth / 1440;
+            const scaleY = window.innerHeight / 1024;
+            const scale = Math.min(scaleX, scaleY);
+
+            // Center the scaled content
+            const scaledWidth = 1440 * scale;
+            const scaledHeight = 1024 * scale;
+            const offsetX = (availableWidth - scaledWidth) / 2;
+            const offsetY = (window.innerHeight - scaledHeight) / 2;
+
+            wrapper.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+        }
+        scaleToFit();
+        window.addEventListener('resize', scaleToFit);
+    </script>
+</body>
+</html>

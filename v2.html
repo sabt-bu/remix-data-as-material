@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Shaped Text</title>
+    <style>
+        @font-face {
+            font-family: 'Cooper Md BT';
+            src: url('Cooper Md BT Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background: #1940F4;
+        }
+
+        .container {
+            width: calc(100% - 240px);
+            height: 100vh;
+            position: relative;
+            background: transparent;
+            overflow: hidden;
+            margin-left: 240px;
+        }
+        .content-wrapper {
+            width: 1440px;
+            height: 1024px;
+            position: absolute;
+            transform-origin: top left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .peel-container {
+            position: relative;
+            width: 967px;
+            height: 698px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .peel {
+            position: absolute;
+        }
+
+        .peel-large {
+            z-index: 1;
+        }
+
+        .peel-medium {
+            z-index: 2;
+        }
+
+        .peel-small {
+            z-index: 3;
+        }
+
+.navbar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar::after {
+    content: '';
+    position: fixed;
+    left: 240px;
+    top: 0;
+    width: 1px;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+}
+
+html, body {
+    padding-left: 0;
+}
+
+
+.navbar-bg {
+    width: 240px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: #1940F4;
+}
+
+.navbar-logo {
+    width: 150px;
+    height: 120px;
+    left: 20px;
+    top: 40px;
+    position: absolute;
+    transform: rotate(-18deg);
+    transform-origin: top left;
+}
+
+.navbar-logo-text {
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    line-height: 20px;
+    position: absolute;
+    left: 20px;
+    top: 35px;
+    width: 100px;
+}
+
+.navbar-section {
+    width: 120px;
+    left: 50px;
+    position: absolute;
+}
+
+.navbar-section-title {
+    color: white;
+    font-size: 16px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 8px;
+}
+
+@keyframes rotateEllipse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.navbar-logo svg {
+    animation: rotateEllipse 20s linear infinite;
+    transform-origin: center center;
+}
+
+.navbar-section-items {
+    color: white;
+    font-size: 12px;
+    font-family: IBM Plex Mono;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.navbar-section-items a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.navbar-section-items a:hover {
+    color: #FF9B5C;
+}
+
+.navbar-section-items a.active {
+    color: #FF9B5C;
+    font-weight: 700;
+}
+
+.navbar-divider {
+    width: 240px;
+    height: 0;
+    left: 0;
+    position: absolute;
+    border-top: 1px white solid;
+    
+}
+
+@media (max-height: 700px) {
+    .navbar {
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    html, body {
+        padding-left: 0;
+    }
+}
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-logo">
+        <div class="navbar-logo-text">The Orange</div>
+        <svg width="130" height="110" style="position: absolute; left: 0; top: 0;">
+            <defs>
+                <path id="ellipsePath" d="M 65,8 a 60,48 0 1,1 -1,0" fill="none"/>
+            </defs>
+            <text fill="white" font-size="8" font-family="IBM Plex Mono, monospace" font-weight="500">
+                <textPath href="#ellipsePath" startOffset="0%">
+                    A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE •
+                </textPath>
+            </text>
+        </svg>
+    </div>
+    <div class="navbar-divider" style="top: 160px;"></div>
+    <div class="navbar-section" style="top: 170px;">
+        <span class="navbar-section-title">Oranges</span>
+        <span class="navbar-section-items"><a href="v1.html">1.1 Space</a><br/><a href="v2.html" class="active">1.2 Peel</a><br/><a href="v3.html">1.3 Whole</a><br/><a href="v4.html">1.4 Slice</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 290px;"></div>
+    <div class="navbar-section" style="top: 300px;">
+        <span class="navbar-section-title">Sharing</span>
+        <span class="navbar-section-items"><a href="v5.html">2.1 Ripple</a><br/><a href="v6.html">2.2 Bag</a><br/><a href="v7.html">2.3 Warmth</a><br/><a href="v8.html">2.4 Peeling</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 420px;"></div>
+    <div class="navbar-section" style="top: 430px;">
+        <span class="navbar-section-title">Attention</span>
+        <span class="navbar-section-items"><a href="v9.html">3.1 Huge Orange</a><br/><a href="v10.html">3.2 Details</a><br/><a href="v11.html">3.3 Exist</a><br/><a href="v12.html">3.4 Stickers</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 550px;"></div>
+    <div class="navbar-section" style="top: 560px;">
+        <span class="navbar-section-title">Play</span>
+        <span class="navbar-section-items"><a href="v13.html">4.1 Search</a><br/><a href="v14.html">4.2 Connect</a><br/><a href="v15.html">4.3 Crossword</a><br/><a href="v16.html">4.4 Search</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 680px;"></div>
+    <div class="navbar-section" style="top: 690px;">
+        <span class="navbar-section-title">Flow</span>
+        <span class="navbar-section-items"><a href="v17.html">5.1 Day</a><br/><a href="v18.html">5.2 Direction</a><br/><a href="v19.html">5.3 Perspective</a><br/><a href="v20.html">5.4 Alphabet Soup</a></span>
+    </div>
+</div>
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="peel-container">
+                <!-- Largest peel (back) - Third stanza -->
+                <svg class="peel peel-large" xmlns="http://www.w3.org/2000/svg" width="967" height="698" viewBox="0 0 967 698" fill="none">
+                  <defs>
+                    <path id="peelPath3" d="M502.729 295.866C504.128 292.673 508.811 279.766 511.589 269.641C514.29 259.797 513.331 240.596 510.534 223.902C508.533 211.963 496.987 204.547 489.523 200.351C478.248 194.012 463.313 196.573 453.178 194.137C442.602 191.594 426.009 172.635 412.502 159.919C399.785 147.946 395.382 138.098 389.449 118.341C386.507 108.545 376.211 102.853 364.16 92.5971C356.014 85.6643 350.649 80.3965 345.733 74.3667C340.541 67.997 333.973 62.088 323.571 57.6407C311.278 52.3846 301.862 51.356 289.902 49.1094C278.871 47.0372 270.571 46.3363 261.71 44.8187C252.937 43.316 246.8 33.2195 237.612 14.7697C234.25 8.01825 230.071 4.55462 226.16 2.49426C218.472 -1.55493 207.045 3.42091 196.341 7.8805C187.459 11.5814 182.947 18.5207 179.392 27.4071C172.103 45.629 177.2 59.3354 174.778 70.1961C173.9 74.132 173.729 79.4471 174.672 85.7334C176.34 96.854 188.105 105.821 194.052 114.007C201.116 123.731 210.31 142.143 218.844 156.454C230.422 175.87 233.795 192.305 239.8 202.437C244.975 211.169 251.469 219.756 258.393 229.716C264.408 238.368 274.299 245.875 291.058 260.624C299.033 267.641 305.449 269.129 305.783 269.734C312.963 282.743 281.256 266.315 272.675 260.836C261.023 253.396 246.707 245.879 234.929 241.93C218.859 236.541 200.265 242.245 190.801 245.302C180.673 248.574 134.604 251.287 105.372 256.53C97.1146 258.012 89.3606 260.62 81.5778 263.529C71.3154 267.364 59.5881 274.945 42.1208 279.65C30.3174 282.83 21.8883 282.879 19.1997 285.632C13.825 291.135 13.2246 301.093 12.351 309.852C11.2432 320.962 7.63944 332.06 2.372 347.615C-2.01627 360.574 5.10304 380.524 9.96914 389.11C15.0637 398.099 28.0252 403.438 36.6389 407.33C43.9413 410.63 51.9628 406.427 56.3574 403.815C63.773 399.407 66.3048 391.02 72.5513 387.158C79.1774 383.062 90.268 393.149 100.085 397.475C107.825 400.885 116.219 399.299 123.92 396.846C132.251 394.192 142.16 392.178 151.809 394.604C161.629 397.074 172.556 395.98 183.564 395.508C193.65 395.077 201.869 409.905 214.041 416.621C222.853 421.483 232.382 422.62 244.384 424.779C268.753 429.163 281.478 420.358 289.748 418.269C296.366 416.597 276.907 437.393 268.915 446.207C263.699 451.959 254.83 454.758 242.76 458.928C229.73 463.429 221.185 465.299 213.793 469.111C204.34 473.986 203.053 487.45 198.047 506.941C194.041 522.537 188.94 532.663 187.658 543.697C185.71 560.452 193.892 567.206 194.151 574.891C194.418 582.845 187.412 589.299 188.759 598.209C190.152 607.423 195.743 615.594 197.878 623.943C200.574 634.487 191.063 644.578 189.23 652.477C187.453 660.133 195.502 666.847 198.665 673.987C201.94 681.381 195.669 687.743 197.09 690.987C200.581 698.954 213.054 696.852 244.797 695.888C266.373 695.232 285.584 694.875 296.055 690.915C305.824 687.221 311.144 677.745 320.074 674.98C331.712 671.375 341.269 657.494 345.076 650.521C349.178 643.006 348.162 633.95 352.16 626.651C355.908 619.811 366.772 617.469 381.584 613.206C395.741 609.132 400.089 601.878 406.616 597.671C413.14 593.466 421.238 588.944 437.905 573.149C445.621 565.837 454.642 559.13 464.561 554.949C473.151 551.328 479.56 552.004 483.299 553.047C491.306 555.28 494.583 564.84 501.033 570.287C507.946 576.123 516.298 582.443 522.531 589.958C528.526 597.186 528.021 606.362 529.732 614.238C531.63 622.969 538.577 628.118 544.668 633.617C550.651 639.019 559.717 642.514 569.744 644.34C578.999 646.026 594.772 644.587 606.577 646.769C618.776 649.025 627.41 658.36 635.465 660.029C643.659 661.727 656.557 660.613 666.732 658.536C686.05 654.594 718.893 654.431 730.555 652.736C741.444 651.154 737.355 634.364 738.378 625.622C739.596 615.222 736.368 604.51 738.532 595.811C740.864 586.434 734.567 569.665 726.124 557.149C717.68 544.631 717.614 517.949 714.912 499.252C712.271 480.975 707.463 473.965 700.944 465.988C692.501 455.656 683.764 447.535 679.028 440.57C674.226 433.508 670.883 424.843 668.703 417.259C666.426 409.337 656.355 406.157 652.548 403.503C640.679 395.23 700.798 399.257 727.277 393.704C740.744 390.879 745.73 381.995 752.507 378.447C762.893 373.009 782.334 372.431 794.111 367.062C803.609 362.732 807.402 352.66 815.032 346.62C824.169 339.388 832.126 328.558 839.374 313.744C843.52 305.269 851.491 298.038 857.899 292.26C865.122 285.748 876.696 280.678 884.969 271.926C893.395 263.011 896.708 249.889 900.269 239.99C903.531 230.92 913.953 224.453 920.256 217.504C926.065 211.099 934.275 205.656 940.768 198.799C947.928 191.237 952.579 181.89 955.754 174.241C958.773 166.968 964.037 160.722 965.345 151.75C967.207 138.987 960.117 130.473 954.22 123.757C947.128 115.678 935.355 111.513 928.448 105.233C920.917 98.3858 911.154 99.1255 903.152 97.9161C894.413 96.5951 885.369 93.2434 876.718 92.4115C864.458 91.2326 858.9 98.8901 852.059 102.257C845.347 105.56 839.332 111.298 830.27 115.562C819.991 120.398 813.857 119.734 810.961 122.002C804.69 126.91 806.083 139.41 802.983 148.278C800.081 156.578 795.198 163.602 788.797 168.079C787.23 169.175 785.283 169.65 783.819 169.184C780.666 168.181 779.084 163.836 774.325 161.634C757.958 154.063 749.052 163.261 741.542 169.311C732.203 176.835 727.868 184.305 718.948 187.979C715.48 189.408 709.726 188.913 707.766 188.149C701.172 185.579 716.502 175.529 721.415 168.414C726.458 161.111 726.093 152.808 730.794 146.254C735.947 139.07 749.137 139.452 757.834 138.03C761.159 137.486 761.72 135.102 762.164 133.14C766.771 112.816 762.602 78.5163 767.923 70.7863C769.192 68.9432 769.416 66.855 768.346 64.9811C765.811 60.5409 760.34 58.3913 757.255 55.6024C751.346 50.261 756.142 40.862 757.769 33.0837C758.177 31.1322 757.394 29.1118 754.921 26.8405C740.123 13.2512 717.431 19.9804 708.483 18.7578C696.978 17.1857 690.775 10.3245 681.046 8.10388C670.674 5.73624 661.968 8.87181 658.398 10.6953C650.874 14.5385 647.352 23.073 643.302 33.8008C640.287 41.7887 631.918 46.6919 623.017 52.4915C611.392 60.0652 600.693 62.2127 592.349 66.3463C581.925 71.51 571.692 80.3792 548.459 102.976C537.475 113.659 530.938 117.721 523.296 120.785C519.414 122.341 515.337 124.424 511.669 127.454C503.64 134.085 502.794 147.3 503.897 163.552C504.92 178.615 514.034 188.702 519.349 201.127C523.939 211.853 524.469 235.258 522.503 250.641C517.711 260.046 514.135 268.672 511.035 276.494C510.316 278.306 509.644 280.07 507.926 283.885" fill="none"/>
+                  </defs>
+                  <text fill="white" font-size="14" font-family="Cooper Md BT, serif" font-weight="400">
+                    <textPath href="#peelPath3" startOffset="0%">
+                      The rest of the day was quite easy. I did all the jobs on my list And enjoyed them and had some time over. I love you. I'm glad I exist. • The rest of the day was quite easy. I did all the jobs on my list And enjoyed them and had some time over. I love you. I'm glad I exist. • The rest of the day was quite easy. I did all the jobs on my list And enjoyed them and had some time over. I love you. I'm glad I exist. • The rest of the day was quite easy. I did all the jobs on my list And enjoyed them and had some time over. I love you. I'm glad I exist. • The rest of the day was quite easy. I did all the jobs on my list And enjoyed them and had some time over. I love you. I'm glad I exist. • The rest of the day was quite easy. I did all the jobs on my list And enjoyed them and had some time over. I love you. I'm glad I exist.
+                    </textPath>
+                  </text>
+                </svg>
+
+                <!-- Medium peel (middle) - Second stanza -->
+                <svg class="peel peel-medium" xmlns="http://www.w3.org/2000/svg" width="856" height="569" viewBox="0 0 856 569" fill="none">
+                  <defs>
+                    <path id="peelPath2" d="M265.414 304.548C254.623 304.548 228.738 303.928 212.314 299.13C191.671 293.099 172.867 275.64 150.963 271.271C135.348 268.155 125.591 274.415 104.601 275.672C58.6648 278.423 48.1727 270.786 38.2926 271.045C25.0224 271.394 15.3886 284.484 7.45811 288.27C5.67097 289.123 3.66261 286.762 2.57584 284.802C0.331274 280.753 0.962764 272.526 1.57803 263.229C2.40863 250.678 16.7479 241.735 28.9581 235.142C38.8548 229.798 54.1727 229.71 75.3283 227.931C130.401 223.299 157.455 229.011 175.264 225.474C188.384 222.868 199.769 219.106 236.085 219.665C256.332 219.977 276.262 224.47 293.112 223.715C301.853 223.323 305.282 218.207 307.857 214.456C313.787 205.821 305.867 189.761 302.81 179.464C299.93 169.765 293.595 162.201 286.402 152.225C276.864 138.994 268.298 125.09 262.134 112.647C253.302 94.8213 236.013 80.1845 227.378 66.1572C218.439 51.6382 214.946 42.1705 212.237 33.1539C209.657 24.5647 210.213 17.7012 211.19 13.6809C213.149 5.62145 234.537 7.63609 248.909 10.3065C264.33 13.1719 281.832 34.4792 293.471 46.591C313.41 67.3391 319.597 82.661 326.764 95.8091C333.621 108.388 340.403 118.419 349.149 127.852C359.7 139.232 385.956 143.642 398.092 150.282C410.846 157.26 411.767 169.409 414.969 187.544C418.917 209.899 425.971 229.872 436.935 250.316C444.11 263.694 456.101 271.422 466.404 275.581C478.393 280.42 490.431 268.853 501.526 258.182C514.51 245.694 519.558 218.839 521.133 200.873C522.413 186.269 520.151 165.071 526.148 124.964C529.5 102.548 539.433 85.3161 559.201 68.1271C572.859 56.2505 583.014 50.8839 589.965 44.1199C598.337 35.9726 603.853 19.7784 613.468 10.0967C619.217 4.30795 626.809 3.34383 632.241 1.79528C639.944 -0.400312 647.739 2.35122 652.622 5.18373C656.742 7.57328 658.961 11.8343 661.481 15.4304C664.021 19.0553 664.305 24.2276 663.719 29.8261C661.702 49.0889 645.346 71.2361 642.62 87.5483C638.759 110.657 629.585 138.972 633.203 148.194C636.886 157.578 668.923 156.397 691.317 153.852C716.34 151.009 731.635 135.411 741.155 127.624C752.268 118.534 770.368 107.701 809.987 87.8715C826.061 79.8264 838.83 79.2156 849.16 82.603C851.414 83.3421 852.994 85.2797 853.809 87.2357C858.013 97.3149 838.702 113.109 827.891 122.707C817.187 132.209 810.075 139.617 799.483 153.381C790.765 164.709 787.508 179.779 780.683 191.25C775.262 200.362 763.942 206.451 754.32 212.762C744.455 219.233 718.681 227.705 677.014 244.141C629.798 262.765 603.471 277.655 599.012 281.277C588.324 289.956 580.799 307.75 574.939 323.105C571.566 331.943 569.22 340.329 571.765 353.844C574.684 369.345 582.519 391.195 597.305 421.052C617.949 462.739 636.739 488.253 639.159 496.913C641.982 507.012 639.229 515.218 636.714 519.053C631.675 526.736 611.487 524.629 589.354 518.899C561.51 511.69 555.264 500.247 546.753 489.02C538.238 477.787 536.305 460.27 531.691 450.571C527.59 441.952 512.727 436.322 493.161 428.561C482.478 424.324 472.146 422.813 421.584 422.178C400.693 421.915 377.385 432.993 345.102 455.618C308.594 481.204 280.595 505.072 264.742 519.793C247.117 536.16 239.395 554.706 230.579 563.151C221.307 572.032 204.851 564.655 201.134 561.827C183.829 548.661 199.044 496.135 206.168 471.665C209.333 460.797 206.705 451.85 208.995 442.152C213.702 422.221 243.48 406.777 253.576 392.187C261.073 381.353 269.212 367.242 274.437 355.787C279.251 345.231 278.816 334.887 278.913 315.888C278.075 309.505 276.313 305.521 273.409 302.629C271.691 301.529 269.479 301.175 267.199 300.81" fill="none"/>
+                  </defs>
+                  <text fill="white" font-size="12" font-family="Cooper Md BT, serif" font-weight="400">
+                    <textPath href="#peelPath2" startOffset="0%">
+                      And that orange, it made me so happy, As ordinary things often do Just lately. The shopping. A walk in the park. This is peace and contentment. It's new. • And that orange, it made me so happy, As ordinary things often do Just lately. The shopping. A walk in the park. This is peace and contentment. It's new. • And that orange, it made me so happy, As ordinary things often do Just lately. The shopping. A walk in the park. This is peace and contentment. It's new. • And that orange, it made me so happy, As ordinary things often do Just lately. The shopping. A walk in the park. This is peace and contentment. It's new. • And that orange, it made me so happy, As ordinary things often do Just lately. The shopping. A walk in the park. This is peace and contentment. It's new.
+                    </textPath>
+                  </text>
+                </svg>
+
+                <!-- Smallest peel (front/center) - First stanza -->
+                <svg class="peel peel-small" xmlns="http://www.w3.org/2000/svg" width="504" height="361" viewBox="0 0 504 361" fill="none">
+                  <defs>
+                    <path id="peelPath1" d="M133.817 225.074C133.817 218.044 132.953 200.61 130.375 192.97C127.822 185.402 114.687 169.303 103.622 157.512C96.6574 150.09 82.2169 151.067 51.4949 151.086C33.8939 151.097 26.5563 156.274 19.0416 157.917C15.3001 158.735 11.3832 158.801 7.6331 158.166C3.61058 157.485 1.79187 152.733 1.10648 149.313C-0.562375 140.986 17.8369 135.436 30.8977 132.232C56.7474 125.893 69.252 132.693 93.2267 137.9C118.106 143.304 141.108 146.239 158.767 142.189C161.562 141.548 162.743 139.389 163.544 136.501C167.158 123.474 159.486 110.315 156.19 97.593C153.743 88.1452 147.23 80.8318 137.167 68.5876C125.334 54.1884 118.607 42.9654 116.342 34.2788C115.588 31.3857 115.833 27.2352 117.179 25.0834C118.525 22.9317 121.382 22.8259 123.803 23.252C132.426 24.7692 138.953 33.4583 146.018 41.764C153.363 50.3974 163.377 68.5373 171.456 77.9418C176.764 84.1204 183.778 89.7258 189.54 98.3474C197.43 110.153 211.559 148.689 222.046 169.853C226.91 179.67 240.217 188.575 249.501 192.997C265.763 200.743 285.996 194.549 303.209 188.944C314.25 185.349 320.82 176.732 332.449 166.018C346.704 152.886 349.941 139.209 354.07 123.872C361.895 94.8017 360.081 70.411 362.203 54.5541C363.909 41.7977 372.73 31.8799 376.928 24.7444C381.737 16.5692 388.433 8.22261 394.38 3.18903C397.285 0.730843 402.767 0.721731 408.055 1.34564C410.326 1.61356 411.278 3.82345 411.978 6.02271C418.635 26.9361 412.481 64.8893 412.522 81.8695C412.539 88.5902 415.992 93.1723 418.467 96.5317C423.138 102.874 434.558 101.31 447.075 99.3026C476.088 94.6494 496.026 82.1405 499.329 82.9199C500.939 83.3 501.708 85.4381 502.194 87.4105C503.2 91.4882 501.248 96.461 498.424 101.182C493.795 108.922 484.357 111.866 474.907 115.404C455.045 122.839 443.909 132.082 417.834 150.417C397.113 164.987 377.232 170.047 366.972 179.95C358.805 187.831 358.858 198.248 358.949 264.628C358.986 291.297 367.865 299.665 372.283 307.771C377.893 318.061 383.29 330.297 387.203 343.647C388.184 346.991 387.632 351.046 387.131 353.877C386.629 356.709 385.598 358.313 383.651 359.177C381.704 360.04 378.872 360.113 376.535 359.541C368.393 357.552 362.203 345.135 355.605 332.717C351.225 324.473 347.847 314.838 343.513 307.459C338.864 299.546 327.642 293.591 317.563 289.494C311.663 287.096 279.894 286.737 236.378 286.054C212.579 285.681 198.239 291.533 187.024 293.807C175.486 296.145 167.234 292.921 156.196 298.47C131.083 311.095 105.481 330.292 88.5759 342.82C82.2989 347.473 75.7487 351.697 71.0266 353.899C69.2116 354.745 67.893 352.71 67.4797 351.011C65.7326 343.832 84.4707 319.68 95.4677 302.991C102.236 292.719 112.641 276.896 120.094 264.216C124.36 256.958 124.007 248.177 126.132 240.768C127.782 237.391 129.913 234.177 132.274 231.101C133.448 229.572 134.573 228.111 135.733 222.589" fill="none"/>
+                  </defs>
+                  <text fill="white" font-size="10" font-family="Cooper Md BT, serif" font-weight="400">
+                    <textPath href="#peelPath1" startOffset="0%">
+                      At lunchtime I bought a huge orange— The size of it made us all laugh. I peeled it and shared it with Robert and Dave— They got quarters and I had a half. • At lunchtime I bought a huge orange— The size of it made us all laugh. I peeled it and shared it with Robert and Dave— They got quarters and I had a half. • At lunchtime I bought a huge orange— The size of it made us all laugh. I peeled it and shared it with Robert and Dave— They got quarters and I had a half. • At lunchtime I bought a huge orange— The size of it made us all laugh. I peeled it and shared it with Robert and Dave— They got quarters and I had a half.
+                    </textPath>
+                  </text>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <script>
+        function scaleToFit() {
+            const wrapper = document.querySelector('.content-wrapper');
+            const navbarWidth = window.innerWidth <= 600 ? 0 : 240;
+            const availableWidth = window.innerWidth - navbarWidth;
+            const scaleX = availableWidth / 1440;
+            const scaleY = window.innerHeight / 1024;
+            const scale = Math.min(scaleX, scaleY);
+
+            // Center the scaled content in the available space (after navbar)
+            const scaledWidth = 1440 * scale;
+            const scaledHeight = 1024 * scale;
+            const offsetX = (availableWidth - scaledWidth) / 2;
+            const offsetY = (window.innerHeight - scaledHeight) / 2;
+
+            wrapper.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+        }
+        scaleToFit();
+        window.addEventListener('resize', scaleToFit);
+    </script>
+</body>
+</html>

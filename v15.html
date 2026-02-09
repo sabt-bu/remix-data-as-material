@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange Poem - Crossword</title>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/cooper-md-bt');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background: #1940F4;
+        }
+
+        .container {
+            width: 1440px;
+            height: 2341px;
+            position: relative;
+            background: #1940F4;
+            overflow: hidden;
+            outline: 1px #1940F4 solid;
+            outline-offset: -1px;
+            transform-origin: top left;
+            margin-left: 240px;
+        }
+
+.navbar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar::after {
+    content: '';
+    position: fixed;
+    left: 240px;
+    top: 0;
+    width: 1px;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+}
+
+html, body {
+    padding-left: 252px;
+}
+
+
+.navbar-bg {
+    width: 240px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: #1940F4;
+}
+
+.navbar-logo {
+    width: 150px;
+    height: 120px;
+    left: 20px;
+    top: 40px;
+    position: absolute;
+    transform: rotate(-18deg);
+    transform-origin: top left;
+}
+
+.navbar-logo-text {
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    line-height: 20px;
+    position: absolute;
+    left: 20px;
+    top: 35px;
+    width: 100px;
+}
+
+.navbar-section {
+    width: 120px;
+    left: 58px;
+    position: absolute;
+}
+
+.navbar-section-title {
+    color: white;
+    font-size: 12px;
+    font-family: Cooper Md BT;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 8px;
+}
+
+@keyframes rotateEllipse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.navbar-logo svg {
+    animation: rotateEllipse 20s linear infinite;
+    transform-origin: center center;
+}
+
+.navbar-section-items a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.navbar-section-items a:hover {
+    color: #FF9B5C;
+}
+
+.navbar-section-items a.active {
+    color: #FF9B5C;
+    font-weight: 700;
+}
+
+.navbar-section-items {
+    color: white;
+    font-size: 12px;
+    font-family: IBM Plex Mono;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.navbar-divider {
+    width: 240px;
+    height: 0;
+    left: -3px;
+    position: absolute;
+    border-top: 1px white solid;
+    
+}
+
+@media (max-height: 700px) {
+    .navbar {
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    html, body {
+        padding-left: 0;
+    }
+}
+
+.letter {
+    position: absolute;
+    color: white;
+    font-family: 'Cooper Md BT', serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+}
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-logo">
+        <div class="navbar-logo-text">The Orange</div>
+        <svg width="130" height="110" style="position: absolute; left: 0; top: 0;">
+            <defs>
+                <path id="ellipsePath" d="M 65,8 a 60,48 0 1,1 -1,0" fill="none"/>
+            </defs>
+            <text fill="white" font-size="8" font-family="IBM Plex Mono, monospace" font-weight="500">
+                <textPath href="#ellipsePath" startOffset="0%">
+                    A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE • A POEM BY WENDY COPE •
+                </textPath>
+            </text>
+        </svg>
+    </div>
+    <div class="navbar-divider" style="top: 160px;"></div>
+    <div class="navbar-section" style="top: 170px;">
+        <span class="navbar-section-title">Oranges</span>
+        <span class="navbar-section-items"><a href="v1.html">1.1 Space</a><br/><a href="v2.html">1.2 Peel</a><br/><a href="v3.html">1.3 Whole</a><br/><a href="v4.html">1.4 Slice</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 290px;"></div>
+    <div class="navbar-section" style="top: 300px;">
+        <span class="navbar-section-title">Sharing</span>
+        <span class="navbar-section-items"><a href="v5.html">2.1 Ripple</a><br/><a href="v6.html">2.2 Bag</a><br/><a href="v7.html">2.3 Warmth</a><br/><a href="v8.html">2.4 Peeling</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 420px;"></div>
+    <div class="navbar-section" style="top: 430px;">
+        <span class="navbar-section-title">Attention</span>
+        <span class="navbar-section-items"><a href="v9.html">3.1 Huge Orange</a><br/><a href="v10.html">3.2 Details</a><br/><a href="v11.html">3.3 Exist</a><br/><a href="v12.html">3.4 Stickers</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 550px;"></div>
+    <div class="navbar-section" style="top: 560px;">
+        <span class="navbar-section-title">Play</span>
+        <span class="navbar-section-items"><a href="v13.html">4.1 Search</a><br/><a href="v14.html">4.2 Connect</a><br/><a href="v15.html" class="active">4.3 Crossword</a><br/><a href="v16.html">4.4 Search</a></span>
+    </div>
+    <div class="navbar-divider" style="top: 680px;"></div>
+    <div class="navbar-section" style="top: 690px;">
+        <span class="navbar-section-title">Flow</span>
+        <span class="navbar-section-items"><a href="v17.html">5.1 Day</a><br/><a href="v18.html">5.2 Direction</a><br/><a href="v19.html">5.3 Perspective</a><br/><a href="v20.html">5.4 Alphabet Soup</a></span>
+    </div>
+</div>
+    <div class="container">
+        <!-- Column 1: "At lunchtime I bought a huge" -->
+        <div class="letter" style="left: 11px; top: 110px;">A</div>
+        <div class="letter" style="left: 11px; top: 125px;">t</div>
+        <div class="letter" style="left: 11px; top: 145px;">l</div>
+        <div class="letter" style="left: 11px; top: 161px;">u</div>
+        <div class="letter" style="left: 11px; top: 176px;">n</div>
+        <div class="letter" style="left: 11px; top: 191px;">c</div>
+        <div class="letter" style="left: 11px; top: 207px;">h</div>
+        <div class="letter" style="left: 11px; top: 222px;">t</div>
+        <div class="letter" style="left: 11px; top: 238px;">i</div>
+        <div class="letter" style="left: 11px; top: 253px;">m</div>
+        <div class="letter" style="left: 11px; top: 268px;">e</div>
+        <div class="letter" style="left: 11px; top: 289px;">I</div>
+        <div class="letter" style="left: 11px; top: 309px;">b</div>
+        <div class="letter" style="left: 11px; top: 325px;">o</div>
+        <div class="letter" style="left: 11px; top: 340px;">u</div>
+        <div class="letter" style="left: 11px; top: 355px;">g</div>
+        <div class="letter" style="left: 11px; top: 370px;">h</div>
+        <div class="letter" style="left: 11px; top: 386px;">t</div>
+        <div class="letter" style="left: 11px; top: 407px;">a</div>
+        <div class="letter" style="left: 11px; top: 427px;">h</div>
+        <div class="letter" style="left: 11px; top: 442px;">u</div>
+        <div class="letter" style="left: 11px; top: 458px;">g</div>
+        <div class="letter" style="left: 11px; top: 473px;">e</div>
+        
+        <!-- Horizontal: "o r a n g e" starting from the 'o' in "bought" -->
+        <div class="letter" style="left: 32px; top: 325px;">r</div>
+        <div class="letter" style="left: 48px; top: 325px;">a</div>
+        <div class="letter" style="left: 63px; top: 325px;">n</div>
+        <div class="letter" style="left: 79px; top: 325px;">g</div>
+        <div class="letter" style="left: 95px; top: 325px;">e</div>
+        
+        <!-- Column 2: "The size of it made us all" -->
+        <div class="letter" style="left: 95px; top: 94px;">T</div>
+        <div class="letter" style="left: 95px; top: 110px;">h</div>
+        <div class="letter" style="left: 95px; top: 125px;">e</div>
+        <div class="letter" style="left: 95px; top: 145px;">s</div>
+        <div class="letter" style="left: 95px; top: 161px;">i</div>
+        <div class="letter" style="left: 95px; top: 176px;">z</div>
+        <div class="letter" style="left: 95px; top: 191px;">e</div>
+        <div class="letter" style="left: 95px; top: 212px;">o</div>
+        <div class="letter" style="left: 95px; top: 227px;">f</div>
+        <div class="letter" style="left: 95px; top: 248px;">i</div>
+        <div class="letter" style="left: 95px; top: 263px;">t</div>
+        <div class="letter" style="left: 95px; top: 284px;">m</div>
+        <div class="letter" style="left: 95px; top: 299px;">a</div>
+        <div class="letter" style="left: 95px; top: 314px;">d</div>
+        <!-- e is shared with "o r a n g e" at 325px -->
+        <div class="letter" style="left: 95px; top: 345px;">u</div>
+        <div class="letter" style="left: 95px; top: 360px;">s</div>
+        <div class="letter" style="left: 95px; top: 381px;">a</div>
+        <div class="letter" style="left: 95px; top: 396px;">l</div>
+        <div class="letter" style="left: 95px; top: 412px;">l</div>
+        
+        <!-- Horizontal: "l a u g h" starting from the 'l' in "all" -->
+        <div class="letter" style="left: 120px; top: 412px;">a</div>
+        <div class="letter" style="left: 135px; top: 412px;">u</div>
+        <div class="letter" style="left: 151px; top: 412px;">g</div>
+        <div class="letter" style="left: 167px; top: 412px;">h</div>
+        
+        <!-- Column 3: "I peeled it and shared it with" -->
+        <div class="letter" style="left: 167px; top: 184px;">I</div>
+        <div class="letter" style="left: 167px; top: 205px;">p</div>
+        <div class="letter" style="left: 167px; top: 220px;">e</div>
+        <div class="letter" style="left: 167px; top: 236px;">e</div>
+        <div class="letter" style="left: 167px; top: 251px;">l</div>
+        <div class="letter" style="left: 167px; top: 266px;">e</div>
+        <div class="letter" style="left: 167px; top: 282px;">d</div>
+        <div class="letter" style="left: 167px; top: 302px;">i</div>
+        <div class="letter" style="left: 167px; top: 317px;">t</div>
+        <div class="letter" style="left: 167px; top: 338px;">a</div>
+        <div class="letter" style="left: 167px; top: 353px;">n</div>
+        <div class="letter" style="left: 167px; top: 369px;">d</div>
+        <div class="letter" style="left: 167px; top: 389px;">s</div>
+        <!-- h is shared with "l a u g h" at 412px -->
+        <div class="letter" style="left: 167px; top: 412px;">h</div>
+        <div class="letter" style="left: 167px; top: 427px;">a</div>
+        <div class="letter" style="left: 167px; top: 442px;">r</div>
+        <div class="letter" style="left: 167px; top: 458px;">e</div>
+        <div class="letter" style="left: 167px; top: 473px;">d</div>
+        <div class="letter" style="left: 167px; top: 494px;">i</div>
+        <div class="letter" style="left: 167px; top: 509px;">t</div>
+        <div class="letter" style="left: 167px; top: 529px;">w</div>
+        <div class="letter" style="left: 167px; top: 545px;">i</div>
+        <div class="letter" style="left: 167px; top: 560px;">t</div>
+        <div class="letter" style="left: 167px; top: 575px;">h</div>
+        
+        <!-- Horizontal: "r o b e r t  a n d  d a v e" starting from the 'r' in "shared" -->
+        <div class="letter" style="left: 192px; top: 442px;">o</div>
+        <div class="letter" style="left: 207px; top: 442px;">b</div>
+        <div class="letter" style="left: 223px; top: 442px;">e</div>
+        <div class="letter" style="left: 239px; top: 442px;">r</div>
+        <div class="letter" style="left: 255px; top: 442px;">t</div>
+        <div class="letter" style="left: 287px; top: 442px;">a</div>
+        <div class="letter" style="left: 302px; top: 442px;">n</div>
+        <div class="letter" style="left: 318px; top: 442px;">d</div>
+        <div class="letter" style="left: 350px; top: 442px;">d</div>
+        <div class="letter" style="left: 366px; top: 442px;">a</div>
+        <div class="letter" style="left: 382px; top: 442px;">v</div>
+        <div class="letter" style="left: 397px; top: 442px;">e</div>
+        
+        <!-- Column 4: "They got quarters and I had a" -->
+        <div class="letter" style="left: 397px; top: 246px;">T</div>
+        <div class="letter" style="left: 397px; top: 261px;">h</div>
+        <div class="letter" style="left: 397px; top: 276px;">e</div>
+        <div class="letter" style="left: 397px; top: 292px;">y</div>
+        <div class="letter" style="left: 397px; top: 312px;">g</div>
+        <div class="letter" style="left: 397px; top: 328px;">o</div>
+        <div class="letter" style="left: 397px; top: 343px;">t</div>
+        <div class="letter" style="left: 397px; top: 364px;">q</div>
+        <div class="letter" style="left: 397px; top: 379px;">u</div>
+        <div class="letter" style="left: 397px; top: 394px;">a</div>
+        <div class="letter" style="left: 397px; top: 410px;">r</div>
+        <div class="letter" style="left: 397px; top: 425px;">t</div>
+        <!-- e is shared with "dave" at 442px -->
+        <div class="letter" style="left: 397px; top: 442px;">e</div>
+        <div class="letter" style="left: 397px; top: 458px;">r</div>
+        <div class="letter" style="left: 397px; top: 473px;">s</div>
+        <div class="letter" style="left: 397px; top: 494px;">a</div>
+        <div class="letter" style="left: 397px; top: 509px;">n</div>
+        <div class="letter" style="left: 397px; top: 524px;">d</div>
+        <div class="letter" style="left: 397px; top: 545px;">I</div>
+        <div class="letter" style="left: 397px; top: 565px;">h</div>
+        <div class="letter" style="left: 397px; top: 581px;">a</div>
+        <div class="letter" style="left: 397px; top: 596px;">d</div>
+        <div class="letter" style="left: 397px; top: 616px;">a</div>
+        
+        <!-- Horizontal: "h a l f" starting from the 'h' in "had" -->
+        <div class="letter" style="left: 422px; top: 565px;">a</div>
+        <div class="letter" style="left: 438px; top: 565px;">l</div>
+        <div class="letter" style="left: 454px; top: 565px;">f</div>
+        
+        <!-- Column 5: "nd that" (a is shared with "half") -->
+        <!-- a is shared with "half" at 422px, 565px -->
+        <div class="letter" style="left: 422px; top: 581px;">n</div>
+        <div class="letter" style="left: 422px; top: 596px;">d</div>
+        <div class="letter" style="left: 422px; top: 616px;">t</div>
+        <div class="letter" style="left: 422px; top: 632px;">h</div>
+        <div class="letter" style="left: 422px; top: 647px;">a</div>
+        <div class="letter" style="left: 422px; top: 550px;">t</div>
+        
+        <!-- Horizontal: "o r a n g e" below "And that" -->
+        <div class="letter" style="left: 422px; top: 686px;">o</div>
+        <div class="letter" style="left: 438px; top: 686px;">r</div>
+        <div class="letter" style="left: 454px; top: 686px;">a</div>
+        <div class="letter" style="left: 469px; top: 686px;">n</div>
+        <div class="letter" style="left: 485px; top: 686px;">g</div>
+        <div class="letter" style="left: 501px; top: 686px;">e</div>
+        
+        <!-- Column 6: "it made me so" -->
+        <div class="letter" style="left: 501px; top: 604px;">i</div>
+        <div class="letter" style="left: 501px; top: 620px;">t</div>
+        <div class="letter" style="left: 501px; top: 640px;">m</div>
+        <div class="letter" style="left: 501px; top: 655px;">a</div>
+        <div class="letter" style="left: 501px; top: 671px;">d</div>
+        <!-- e is shared with "o r a n g e" at 686px -->
+        <div class="letter" style="left: 501px; top: 686px;">e</div>
+        <div class="letter" style="left: 501px; top: 701px;">m</div>
+        <div class="letter" style="left: 501px; top: 717px;">e</div>
+        <div class="letter" style="left: 501px; top: 737px;">s</div>
+        <div class="letter" style="left: 501px; top: 753px;">o</div>
+        
+        <!-- Horizontal: "h a p p y" -->
+        <div class="letter" style="left: 501px; top: 778px;">h</div>
+        <div class="letter" style="left: 517px; top: 778px;">a</div>
+        <div class="letter" style="left: 533px; top: 778px;">p</div>
+        <div class="letter" style="left: 549px; top: 778px;">p</div>
+        <div class="letter" style="left: 564px; top: 778px;">y</div>
+        
+        <!-- Column 7: "As ordinary things often" (o is shared) -->
+        <div class="letter" style="left: 564px; top: 635px;">A</div>
+        <div class="letter" style="left: 564px; top: 650px;">s</div>
+        <div class="letter" style="left: 564px; top: 671px;">o</div>
+        <div class="letter" style="left: 564px; top: 686px;">r</div>
+        <div class="letter" style="left: 564px; top: 701px;">d</div>
+        <div class="letter" style="left: 564px; top: 717px;">i</div>
+        <div class="letter" style="left: 564px; top: 732px;">n</div>
+        <div class="letter" style="left: 564px; top: 748px;">a</div>
+        <div class="letter" style="left: 564px; top: 763px;">r</div>
+        <!-- y is shared with "happy" at 778px -->
+        <div class="letter" style="left: 564px; top: 778px;">y</div>
+        <div class="letter" style="left: 564px; top: 794px;">t</div>
+        <div class="letter" style="left: 564px; top: 809px;">h</div>
+        <div class="letter" style="left: 564px; top: 824px;">i</div>
+        <div class="letter" style="left: 564px; top: 840px;">n</div>
+        <div class="letter" style="left: 564px; top: 855px;">g</div>
+        <div class="letter" style="left: 564px; top: 870px;">s</div>
+        <div class="letter" style="left: 564px; top: 891px;">o</div>
+        <div class="letter" style="left: 564px; top: 906px;">f</div>
+        <div class="letter" style="left: 564px; top: 922px;">t</div>
+        <div class="letter" style="left: 564px; top: 937px;">e</div>
+        <div class="letter" style="left: 564px; top: 952px;">n</div>
+        
+        <!-- Column 8: "Just lately. The shopping. A walk in the" -->
+        <div class="letter" style="left: 589px; top: 437px;">J</div>
+        <div class="letter" style="left: 589px; top: 453px;">u</div>
+        <div class="letter" style="left: 589px; top: 468px;">s</div>
+        <div class="letter" style="left: 589px; top: 483px;">t</div>
+        <div class="letter" style="left: 589px; top: 504px;">l</div>
+        <div class="letter" style="left: 589px; top: 519px;">a</div>
+        <div class="letter" style="left: 589px; top: 535px;">t</div>
+        <div class="letter" style="left: 589px; top: 550px;">e</div>
+        <div class="letter" style="left: 589px; top: 565px;">l</div>
+        <div class="letter" style="left: 589px; top: 581px;">y</div>
+        <div class="letter" style="left: 589px; top: 596px;">.</div>
+        <div class="letter" style="left: 589px; top: 616px;">T</div>
+        <div class="letter" style="left: 589px; top: 632px;">h</div>
+        <div class="letter" style="left: 589px; top: 647px;">e</div>
+        <div class="letter" style="left: 589px; top: 668px;">s</div>
+        <div class="letter" style="left: 589px; top: 683px;">h</div>
+        <!-- o is shared with "do" at 701px -->
+        <div class="letter" style="left: 589px; top: 701px;">o</div>
+        <div class="letter" style="left: 589px; top: 714px;">p</div>
+        <div class="letter" style="left: 589px; top: 729px;">p</div>
+        <div class="letter" style="left: 589px; top: 744px;">i</div>
+        <div class="letter" style="left: 589px; top: 760px;">n</div>
+        <div class="letter" style="left: 589px; top: 775px;">g</div>
+        <div class="letter" style="left: 589px; top: 791px;">.</div>
+        <div class="letter" style="left: 589px; top: 811px;">A</div>
+        <div class="letter" style="left: 589px; top: 831px;">w</div>
+        <div class="letter" style="left: 589px; top: 847px;">a</div>
+        <div class="letter" style="left: 589px; top: 862px;">l</div>
+        <div class="letter" style="left: 589px; top: 878px;">k</div>
+        <div class="letter" style="left: 589px; top: 898px;">i</div>
+        <div class="letter" style="left: 589px; top: 913px;">n</div>
+        <div class="letter" style="left: 589px; top: 934px;">t</div>
+        <div class="letter" style="left: 589px; top: 949px;">h</div>
+        <div class="letter" style="left: 589px; top: 965px;">e</div>
+        
+        <!-- Horizontal: "p a r k" starting from 'p' in "shopping" -->
+        <div class="letter" style="left: 605px; top: 714px;">a</div>
+        <div class="letter" style="left: 621px; top: 714px;">r</div>
+        <div class="letter" style="left: 636px; top: 714px;">k</div>
+        
+        <!-- Column 9: "This is peace and contentment. It's" -->
+        <div class="letter" style="left: 700px; top: 128px;">T</div>
+        <div class="letter" style="left: 700px; top: 143px;">h</div>
+        <div class="letter" style="left: 700px; top: 159px;">i</div>
+        <div class="letter" style="left: 700px; top: 174px;">s</div>
+        <div class="letter" style="left: 700px; top: 195px;">i</div>
+        <div class="letter" style="left: 700px; top: 170px;">s</div>
+        <div class="letter" style="left: 700px; top: 230px;">p</div>
+        <div class="letter" style="left: 700px; top: 246px;">e</div>
+        <div class="letter" style="left: 700px; top: 261px;">a</div>
+        <div class="letter" style="left: 700px; top: 276px;">c</div>
+        <div class="letter" style="left: 700px; top: 292px;">e</div>
+        <div class="letter" style="left: 700px; top: 312px;">a</div>
+        <div class="letter" style="left: 700px; top: 328px;">n</div>
+        <div class="letter" style="left: 700px; top: 343px;">d</div>
+        <div class="letter" style="left: 700px; top: 364px;">c</div>
+        <div class="letter" style="left: 700px; top: 379px;">o</div>
+        <!-- n is shared with "new" at 394px -->
+        <div class="letter" style="left: 700px; top: 394px;">n</div>
+        <div class="letter" style="left: 700px; top: 410px;">t</div>
+        <div class="letter" style="left: 700px; top: 425px;">e</div>
+        <div class="letter" style="left: 700px; top: 440px;">n</div>
+        <div class="letter" style="left: 700px; top: 456px;">t</div>
+        <div class="letter" style="left: 700px; top: 471px;">m</div>
+        <div class="letter" style="left: 700px; top: 486px;">e</div>
+        <div class="letter" style="left: 700px; top: 502px;">n</div>
+        <div class="letter" style="left: 700px; top: 517px;">t</div>
+        <div class="letter" style="left: 700px; top: 532px;">.</div>
+        <div class="letter" style="left: 700px; top: 553px;">I</div>
+        <div class="letter" style="left: 700px; top: 568px;">t</div>
+        <div class="letter" style="left: 700px; top: 584px;">'</div>
+        <div class="letter" style="left: 700px; top: 599px;">s</div>
+        
+        <!-- Horizontal: "n e w" starting from first 'n' in "contentment" -->
+        <div class="letter" style="left: 716px; top: 394px;">e</div>
+        <div class="letter" style="left: 732px; top: 394px;">w</div>
+        
+        <!-- Horizontal: "n e w" starting from 'n' in "contentment" -->
+        
+        <!-- Column 10: "The rest of the day was quite" -->
+        <div class="letter" style="left: 732px; top: 129px;">T</div>
+        <div class="letter" style="left: 732px; top: 144px;">h</div>
+        <div class="letter" style="left: 732px; top: 160px;">e</div>
+        <div class="letter" style="left: 732px; top: 180px;">r</div>
+        <div class="letter" style="left: 732px; top: 196px;">e</div>
+        <div class="letter" style="left: 732px; top: 211px;">s</div>
+        <div class="letter" style="left: 732px; top: 226px;">t</div>
+        <div class="letter" style="left: 732px; top: 247px;">o</div>
+        <div class="letter" style="left: 732px; top: 262px;">f</div>
+        <div class="letter" style="left: 732px; top: 283px;">t</div>
+        <div class="letter" style="left: 732px; top: 298px;">h</div>
+        <div class="letter" style="left: 732px; top: 313px;">e</div>
+        <div class="letter" style="left: 732px; top: 334px;">d</div>
+        <div class="letter" style="left: 732px; top: 349px;">a</div>
+        <div class="letter" style="left: 732px; top: 365px;">y</div>
+        <!-- w is shared with "new" at 394px -->
+        <div class="letter" style="left: 732px; top: 394px;">w</div>
+        <div class="letter" style="left: 732px; top: 425px;">s</div>
+        <div class="letter" style="left: 732px; top: 445px;">q</div>
+        <div class="letter" style="left: 732px; top: 461px;">u</div>
+        <div class="letter" style="left: 732px; top: 476px;">i</div>
+        <div class="letter" style="left: 732px; top: 492px;">t</div>
+        <div class="letter" style="left: 732px; top: 507px;">e</div>
+        
+        <!-- Horizontal: "e a s y" starting from 'e' in "quite" -->
+        <div class="letter" style="left: 747px; top: 507px;">a</div>
+        <div class="letter" style="left: 763px; top: 507px;">s</div>
+        <div class="letter" style="left: 779px; top: 507px;">y</div>
+        
+        <!-- Column 11: "I did all the jobs on my" -->
+        <div class="letter" style="left: 779px; top: 213px;">I</div>
+        <div class="letter" style="left: 779px; top: 233px;">d</div>
+        <div class="letter" style="left: 779px; top: 249px;">i</div>
+        <div class="letter" style="left: 779px; top: 264px;">d</div>
+        <div class="letter" style="left: 779px; top: 285px;">a</div>
+        <div class="letter" style="left: 779px; top: 300px;">l</div>
+        <div class="letter" style="left: 779px; top: 315px;">l</div>
+        <div class="letter" style="left: 779px; top: 336px;">t</div>
+        <div class="letter" style="left: 779px; top: 351px;">h</div>
+        <div class="letter" style="left: 779px; top: 367px;">e</div>
+        <div class="letter" style="left: 779px; top: 387px;">j</div>
+        <div class="letter" style="left: 779px; top: 402px;">o</div>
+        <div class="letter" style="left: 779px; top: 418px;">b</div>
+        <div class="letter" style="left: 779px; top: 433px;">s</div>
+        <div class="letter" style="left: 779px; top: 454px;">o</div>
+        <div class="letter" style="left: 779px; top: 469px;">n</div>
+        <div class="letter" style="left: 779px; top: 489px;">m</div>
+        <!-- y is shared with "e a s y" at 507px -->
+        <div class="letter" style="left: 779px; top: 507px;">y</div>
+        
+        <!-- Horizontal: "l i s t" starting from second 'l' in "all" -->
+        <div class="letter" style="left: 795px; top: 315px;">i</div>
+        <div class="letter" style="left: 811px; top: 315px;">s</div>
+        <div class="letter" style="left: 827px; top: 315px;">t</div>
+        
+        <!-- Column 12: "And enjoyed them and had some time" -->
+        <div class="letter" style="left: 827px; top: 170px;">A</div>
+        <div class="letter" style="left: 827px; top: 165px;">n</div>
+        <div class="letter" style="left: 827px; top: 180px;">d</div>
+        <div class="letter" style="left: 827px; top: 201px;">e</div>
+        <div class="letter" style="left: 827px; top: 216px;">n</div>
+        <div class="letter" style="left: 827px; top: 231px;">j</div>
+        <div class="letter" style="left: 827px; top: 247px;">o</div>
+        <div class="letter" style="left: 827px; top: 262px;">y</div>
+        <div class="letter" style="left: 827px; top: 278px;">e</div>
+        <div class="letter" style="left: 827px; top: 293px;">d</div>
+        <!-- t is shared with "list" at 315px -->
+        <div class="letter" style="left: 827px; top: 315px;">t</div>
+        <div class="letter" style="left: 827px; top: 331px;">h</div>
+        <div class="letter" style="left: 827px; top: 346px;">e</div>
+        <div class="letter" style="left: 827px; top: 361px;">m</div>
+        <div class="letter" style="left: 827px; top: 382px;">a</div>
+        <div class="letter" style="left: 827px; top: 397px;">n</div>
+        <div class="letter" style="left: 827px; top: 413px;">d</div>
+        <div class="letter" style="left: 827px; top: 433px;">h</div>
+        <div class="letter" style="left: 827px; top: 449px;">a</div>
+        <div class="letter" style="left: 827px; top: 464px;">d</div>
+        <div class="letter" style="left: 827px; top: 470px;">a</div>
+        <div class="letter" style="left: 827px; top: 484px;">s</div>
+        <!-- o is shared with "over" at 500px -->
+        <div class="letter" style="left: 827px; top: 500px;">o</div>
+        <div class="letter" style="left: 827px; top: 515px;">m</div>
+        <div class="letter" style="left: 827px; top: 550px;">e</div>
+        <div class="letter" style="left: 827px; top: 551px;">t</div>
+        <div class="letter" style="left: 827px; top: 566px;">i</div>
+        <div class="letter" style="left: 827px; top: 582px;">m</div>
+        <div class="letter" style="left: 827px; top: 597px;">e</div>
+        
+        <!-- Horizontal: "o v e r" starting from 'o' in "some" -->
+        <div class="letter" style="left: 842px; top: 500px;">v</div>
+        <div class="letter" style="left: 858px; top: 500px;">e</div>
+        <div class="letter" style="left: 874px; top: 500px;">r</div>
+        
+        
+        <!-- Column 13: "I love you. I'm glad I exist." -->
+        <div class="letter" style="left: 858px; top: 213px;">I</div>
+        <div class="letter" style="left: 858px; top: 233px;">l</div>
+        <div class="letter" style="left: 858px; top: 249px;">o</div>
+        <div class="letter" style="left: 858px; top: 264px;">v</div>
+        <div class="letter" style="left: 858px; top: 279px;">e</div>
+        <div class="letter" style="left: 858px; top: 295px;">y</div>
+        <div class="letter" style="left: 858px; top: 310px;">o</div>
+        <div class="letter" style="left: 858px; top: 326px;">u</div>
+        <div class="letter" style="left: 858px; top: 341px;">.</div>
+        <div class="letter" style="left: 858px; top: 361px;">I</div>
+        <div class="letter" style="left: 858px; top: 377px;">'</div>
+        <div class="letter" style="left: 858px; top: 392px;">m</div>
+        <div class="letter" style="left: 858px; top: 413px;">g</div>
+        <div class="letter" style="left: 858px; top: 428px;">l</div>
+        <div class="letter" style="left: 858px; top: 443px;">a</div>
+        <div class="letter" style="left: 858px; top: 459px;">d</div>
+        <div class="letter" style="left: 858px; top: 479px;">I</div>
+        <!-- e is shared with "over" at 500px -->
+        <div class="letter" style="left: 858px; top: 500px;">e</div>
+        <div class="letter" style="left: 858px; top: 515px;">x</div>
+        <div class="letter" style="left: 858px; top: 530px;">i</div>
+        <div class="letter" style="left: 858px; top: 546px;">s</div>
+        <div class="letter" style="left: 858px; top: 561px;">t</div>
+        <div class="letter" style="left: 858px; top: 577px;">.</div>
+    </div>
+    <script>
+        function scaleToFit() {
+            const container = document.querySelector('.container');
+            const navbarWidth = window.innerWidth <= 600 ? 0 : 240;
+            const availableWidth = window.innerWidth - navbarWidth;
+            const scaleX = availableWidth / 1440;
+            const scaleY = window.innerHeight / 1024;
+            const scale = Math.min(scaleX, scaleY);
+            
+            // Position lower and to the left
+            const scaledWidth = 1440 * scale;
+            const scaledHeight = 2341 * scale; // v15.html container height is 2341px
+            const offsetX = (availableWidth - scaledWidth) / 2 - 250; // Shift 250px to the left
+            const offsetY = (window.innerHeight - scaledHeight) / 2 + 500; // Move down 500px
+            
+            container.style.transformOrigin = 'top left';
+            container.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+        }
+        scaleToFit();
+        window.addEventListener('resize', scaleToFit);
+    </script>
+</body>
+</html>
